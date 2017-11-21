@@ -18,7 +18,7 @@ public class ImageUtils {
 	 * @return 错误返回null
 	 */
 	public static ImageIcon getImage(String res,int width,int height){
-		ImageIcon imageIcon =new ImageIcon(MainFrame.class.getResource(res));
+		ImageIcon imageIcon =new ImageIcon(MainFrame.class.getResource("../"+res));
 		Image image = imageIcon.getImage().getScaledInstance(width,height, Image.SCALE_DEFAULT);
 		imageIcon.setImage(image);
 		return imageIcon;

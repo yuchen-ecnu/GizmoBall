@@ -257,6 +257,7 @@ public class MainFrame extends JFrame {
 		btnDonate.setIcon(ImageUtils.getImage("donate.png", 20, 20));
 		panel.add(btnDonate);
 		btnDonate.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				DonateDialog dialog = new DonateDialog(MainFrame.this);
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
