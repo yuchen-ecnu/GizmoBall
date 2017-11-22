@@ -1,11 +1,13 @@
 package controller;
 
 import entity.base.AbstractCustomBody;
+import listener.UiListener;
 import org.jbox2d.collision.AABB;
 import org.jbox2d.collision.broadphase.BroadPhaseStrategy;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +16,7 @@ import java.util.List;
 * @author Jack Chen
 * @date 2017/11/21
 */
-public class GameController {
+public class GameController implements UiListener{
     private World world;
     private List<AbstractCustomBody> components;
     
@@ -33,4 +35,8 @@ public class GameController {
 
     }
 
+    @Override
+    public boolean onItemAdd(Point point) {
+        return true;
+    }
 }

@@ -31,6 +31,16 @@ public class Constant {
     public static final int WINDOW_DONATE_HEIGHT = 562;
     public static final String IMG_DONATE = "donate.jpg";
 
+    //操作类型
+    public static final int COMPONENT_CIRCLE = 1;
+    public static final int COMPONENT_TRIANGLE = 2;
+    public static final int COMPONENT_SQUARE = 3;
+    public static final int COMPONENT_TRAPEZOID = 4;
+    public static final int COMPONENT_BALL = 5;
+    public static final int COMPONENT_ADVANCED_SQUARE = 6;
+    public static final int COMPONENT_BAFFLE = 7;
+
+
     //颜色
     public static final Color CIRCLE_COLOR = new Color(98,169,241);
     public static final Color TRIANGLE_COLOR = new Color(247,126,110);
