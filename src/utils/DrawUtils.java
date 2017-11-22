@@ -9,10 +9,10 @@ public class DrawUtils {
 
     public static void drawCircle(int x,int y, Graphics g,int size) {
         g.setColor(Constant.CIRCLE_COLOR);
-        g.fillOval(x,y,(Constant.BOARD_SIZE / Constant.GRID_COUNT)*size ,(Constant.BOARD_SIZE / Constant.GRID_COUNT)*size);
+        g.fillOval(x,y,size,size);
     }
     public static void drawSquare(int x,int y, Graphics g,int size) {
         g.setColor(Constant.SQUARE_COLOR);
-        g.fillRect(x,y,(Constant.BOARD_SIZE / Constant.GRID_COUNT)*size ,(Constant.BOARD_SIZE / Constant.GRID_COUNT)*size);
+        g.fillRect(x,y,size,size);
     }
 }
