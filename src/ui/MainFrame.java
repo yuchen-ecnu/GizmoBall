@@ -3,18 +3,15 @@ package ui;
 import constant.Constant;
 import utils.ImageUtils;
 import utils.ScreenUtils;
-
 import java.awt.EventQueue;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.GridLayout;
-
 import java.awt.Color;
 import java.awt.Dimension;
-
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.NumberFormatter;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -282,6 +279,13 @@ public class MainFrame extends JFrame {
 		JSpinner bodySize = new JSpinner();
 		bodySize.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		bodySize.setBounds(69, 21, 60, 22);
+        JSpinner.NumberEditor editor = new JSpinner.NumberEditor(bodySize, "0");
+        bodySize.setEditor(editor);
+        JFormattedTextField textField = ((JSpinner.NumberEditor) bodySize.getEditor()).getTextField();
+        textField.setEditable(true);
+        DefaultFormatterFactory factory = (DefaultFormatterFactory) textField .getFormatterFactory();
+        NumberFormatter formatter = (NumberFormatter) factory.getDefaultFormatter();
+        formatter.setAllowsInvalid(false);
 		panel.add(bodySize);
 
 		JLabel lblSize = new JLabel("Size:");

@@ -4,7 +4,12 @@ import entity.base.AbstractCustomBody;
 
 import java.awt.*;
 
-public class CircleBody extends AbstractCustomBody {
+/**
+ * 挡板
+ */
+public class BaffleBody extends AbstractCustomBody {
+    int type;
+
     @Override
     public void drawSelf(Canvas canvas, Paint paint) {
 

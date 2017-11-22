@@ -12,10 +12,9 @@ import java.awt.*;
  * @date 2017/11/21
  */
 public class SquareBody extends AbstractCustomBody{
-    private float radius;      //圆形半径
 
-    public SquareBody(Body body, float radius, int color) {
-        this.radius = radius;
+
+    public SquareBody(Body body, int color) {
         this.body = body;
         this.color = color;
     }

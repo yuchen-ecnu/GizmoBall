@@ -17,9 +17,19 @@ import java.util.List;
 public class GameController {
     private World world;
     private List<AbstractCustomBody> components;
+    
     public GameController() {
         components = new ArrayList<>();
-        world = new World(new Vec2(0.0f,10.0f)); //创建世界
+        //创建 重力加速度为10 的世界
+        world = new World(new Vec2(0.0f,10.0f));
+        //创建边界
+        createBoundary();
+    }
+
+    /**
+     * 创建边界
+     */
+    private void createBoundary() {
 
     }
 
