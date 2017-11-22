@@ -29,6 +29,7 @@ public class SquareBody extends AbstractCustomBody{
         Vec2 vec2 = body.getPosition();
         float x = vec2.x - size/2.0f;
         float y = vec2.y - size/2.0f;
-        DrawUtils.drawSquare(x,y,g,size);
+        int unitSize = Constant.BOARD_SIZE/Constant.GRID_COUNT;
+        DrawUtils.drawSquare(x*unitSize,y*unitSize,g,size*unitSize);
     }
 }

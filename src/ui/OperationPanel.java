@@ -214,7 +214,7 @@ public class OperationPanel extends JPanel implements ActionListener{
         btnDonate = new JButton("Donate");
         btnDonate.setBounds(29, 183, 100, 28);
         btnDonate.setIcon(ImageUtils.getImage("donate.png", 20, 20));
-        btnCircle.addActionListener(this);
+        btnDonate.addActionListener(this);
         panel.add(btnDonate);
         btnDonate.setOpaque(false);
         btnDonate.setContentAreaFilled(false);

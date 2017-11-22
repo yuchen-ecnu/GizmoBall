@@ -1,6 +1,7 @@
 package listener;
 
 import entity.base.AbstractCustomBody;
+import org.jbox2d.dynamics.World;
 
 import java.awt.*;
 import java.util.List;
@@ -13,6 +14,6 @@ import java.util.List;
 */
 public interface UiListener {
     List<AbstractCustomBody> onItemAdd(Point point, int currentType,int size);
-    void onOperationClicked(int type);
+    World onOperationClicked(int type);
     List<AbstractCustomBody> componentInfoProvider();
 }

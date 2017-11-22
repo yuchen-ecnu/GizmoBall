@@ -26,9 +26,6 @@ public class MainFrame extends JFrame {
 	private OperationPanel operationPanel;
 	private Point point = new Point();
 
-	/**
-	 * Create the frame.
-	 */
 	public MainFrame(OperationListener listener) {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

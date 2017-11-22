@@ -3,6 +3,8 @@ package controller;
 import constant.Constant;
 import listener.OperationListener;
 import listener.UiListener;
+import org.jbox2d.dynamics.World;
+import thread.DrawThread;
 import ui.MainFrame;
 
 import java.awt.*;
@@ -31,7 +33,10 @@ public class UiController implements OperationListener{
 
     @Override
     public void onOperationClicked(int type) {
-        uiListener.onOperationClicked(type);
+        World world = uiListener.onOperationClicked(type);
+        if(type==Constant.OPERATION_PLAY){
+            new DrawThread(world,UiController.this).start();
+        }
     }
 
     @Override

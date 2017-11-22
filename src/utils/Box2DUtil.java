@@ -300,7 +300,7 @@ public class Box2DUtil {
      * @param color 物体颜色
      * @return
      */
-    public static TrapezoidBody trapezoidBody(float x, float y, float size, boolean isStatic, World world, Color color){
+    public static TrapezoidBody createTrapezoidBody(float x, float y, float size, boolean isStatic, World world, Color color){
         PolygonShape trapezoidBody = new PolygonShape();
 
         float r = size / 2.0f / Constant.RATE;

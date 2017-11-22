@@ -1,7 +1,7 @@
 package controller;
 
 import constant.Constant;
-import entity.SquareBody;
+import entity.*;
 import entity.base.AbstractCustomBody;
 import listener.UiListener;
 import org.jbox2d.common.Vec2;
@@ -65,27 +65,44 @@ public class GameController implements UiListener{
         if(isEmpty(point.x, point.y,size)) {
             switch (currentType) {
                 case Constant.COMPONENT_CIRCLE:
-
+                    CircleBody circleBody = Box2DUtil.createCircle(point.x,point.y,size,true,world,Constant.COLOR_SQUARE);
+                    components.add(circleBody);
                     break;
                 case Constant.COMPONENT_TRIANGLE:
+                    TriangleBody triangleBody = Box2DUtil.createTriangle(point.x,point.y,size,true,world,Constant.COLOR_SQUARE);
+                    components.add(triangleBody);
                     break;
                 case Constant.COMPONENT_SQUARE:
-                    SquareBody squareBody = Box2DUtil.createSquare(point.x,point.y,size,false,world,Constant.COLOR_SQUARE);
+                    SquareBody squareBody = Box2DUtil.createSquare(point.x,point.y,size,true,world,Constant.COLOR_SQUARE);
                     components.add(squareBody);
                     break;
                 case Constant.COMPONENT_TRAPEZOID:
+                    TrapezoidBody trapezoidBody = Box2DUtil.createTrapezoidBody(point.x,point.y,size,true,world,Constant.COLOR_SQUARE);
+                    components.add(trapezoidBody);
                     break;
                 case Constant.COMPONENT_BALL:
+                    Ball ball = Box2DUtil.createBall(point.x,point.y,size,world,Constant.COLOR_SQUARE);
+                    components.add(ball);
                     break;
                 case Constant.COMPONENT_ADVANCED_SQUARE:
+                    AdvanceSquareBody advanceSquareBody = Box2DUtil.createAdvanceSquareBody(point.x,point.y,size,world,Constant.COLOR_SQUARE);
+                    components.add(advanceSquareBody);
                     break;
                 case Constant.COMPONENT_ELASTIC_PLATE:
+                    ElasticPlateBody elasticPlateBody = Box2DUtil.createElasticPlateBody(point.x,point.y,size,world,Constant.COLOR_SQUARE);
+                    components.add(elasticPlateBody);
                     break;
                 case Constant.COMPONENT_LEFT_BAFFLE:
+                    BaffleBody leftBaffleBody = Box2DUtil.createBaffleBody(point.x,point.y,size,Constant.COMPONENT_LEFT_BAFFLE,world,Constant.COLOR_SQUARE);
+                    components.add(leftBaffleBody);
                     break;
                 case Constant.COMPONENT_RIGHT_BAFFLE:
+                    BaffleBody rightBaffleBody = Box2DUtil.createBaffleBody(point.x,point.y,size,Constant.COMPONENT_RIGHT_BAFFLE,world,Constant.COLOR_SQUARE);
+                    components.add(rightBaffleBody);
                     break;
                 case Constant.COMPONENT_ABSORBER:
+                    AbsorberBody absorberBody = Box2DUtil.createAbsorber(point.x,point.y,size,world,Constant.COLOR_SQUARE);
+                    components.add(absorberBody);
                     break;
                 default:
                     break;
@@ -95,12 +112,13 @@ public class GameController implements UiListener{
     }
 
     @Override
-    public void onOperationClicked(int type) {
+    public World onOperationClicked(int type) {
         if(type == Constant.OPERATION_PLAY){
             Constant.DRAW_THREAD_FLAG = true;
         }else if(type == Constant.OPERATION_PAUSE){
             Constant.DRAW_THREAD_FLAG = false;
         }
+        return world;
     }
 
     @Override
