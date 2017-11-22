@@ -1,6 +1,8 @@
 package ui;
 
 import constant.Constant;
+import entity.CircleBody;
+import org.jbox2d.dynamics.Body;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -34,6 +36,9 @@ public class BoardPanel extends JPanel {
 		for(int i =0;i<Constant.BOARD_SIZE;i+=size){
 			g.drawLine(0, i, Constant.BOARD_SIZE, i);
 		}
+
+        CircleBody circleBody = new CircleBody(Constant.CIRCLE_COLOR,1);
+        circleBody.drawSelf(this,g);
 	}
 	
 

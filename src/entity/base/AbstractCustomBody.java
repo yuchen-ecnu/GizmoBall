@@ -2,6 +2,7 @@ package entity.base;
 
 import org.jbox2d.dynamics.Body;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -13,7 +14,8 @@ import java.awt.*;
  */
 public abstract class AbstractCustomBody {
     protected Body body;      //JBox2D物理引擎中的刚体(Body)
-    protected int color;      //刚体的颜色
+    protected Color color;      //刚体的颜色
+    protected int size;       //物体的大小为size*格子边长
 
-    public abstract void drawSelf(Canvas canvas, Paint paint);
+    public abstract void drawSelf(JPanel boardPanel, Graphics g);
 }

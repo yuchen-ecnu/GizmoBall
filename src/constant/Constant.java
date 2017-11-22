@@ -1,5 +1,7 @@
 package constant;
 
+import java.awt.*;
+
 /**
  * @description 常量
  * @author Jack Chen
@@ -28,4 +30,13 @@ public class Constant {
     public static final int WINDOW_DONATE_WIDTH = 356;
     public static final int WINDOW_DONATE_HEIGHT = 562;
     public static final String IMG_DONATE = "donate.jpg";
+
+    //颜色
+    public static final Color CIRCLE_COLOR = new Color(98,169,241);
+    public static final Color TRIANGLE_COLOR = new Color(247,126,110);
+    public static final Color SQUARE_COLOR = new Color(1,177,175);
+    public static final Color TRAPEZOID_COLOR = new Color(243,202,126);
+    public static final Color BALL_COLOR = new Color(188,187,194);
+    public static final Color STICK_SQUARE_COLOR = new Color(232,152,154);
+    public static final Color STICK_COLOR = new Color(243,202,126);
 }

@@ -1,8 +1,10 @@
 package entity;
 
+import constant.Constant;
 import entity.base.AbstractCustomBody;
 import org.jbox2d.dynamics.Body;
 
+import javax.swing.*;
 import java.awt.*;
 
 
@@ -14,13 +16,20 @@ import java.awt.*;
 public class SquareBody extends AbstractCustomBody{
 
 
-    public SquareBody(Body body, int color) {
+    public SquareBody(Body body, Color color,int size) {
         this.body = body;
         this.color = color;
+        this.size = size;
+    }
+
+    public SquareBody(Color color,int size) {
+        this.color = color;
+        this.size = size;
     }
 
     @Override
-    public void drawSelf(Canvas canvas, Paint paint) {
+    public void drawSelf(JPanel boardPanel, Graphics g) {
+        g.setColor(Constant.SQUARE_COLOR);
 
     }
 }

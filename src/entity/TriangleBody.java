@@ -2,6 +2,7 @@ package entity;
 
 import entity.base.AbstractCustomBody;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -9,7 +10,7 @@ import java.awt.*;
  */
 public class TriangleBody extends AbstractCustomBody {
     @Override
-    public void drawSelf(Canvas canvas, Paint paint) {
+    public void drawSelf(JPanel boardPanel, Graphics g) {
 
     }
 }

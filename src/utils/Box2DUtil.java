@@ -7,6 +7,8 @@ import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.dynamics.*;
 
+import java.awt.*;
+
 import static constant.Constant.RATE;
 
 /**
@@ -25,7 +27,7 @@ public class Box2DUtil {
      * @param world 所属模拟世界
      * @param color 颜色
      */
-    public static SquareBody createSquare(float x,float y, float size, boolean isStatic, World world, int color) {
+    public static SquareBody createSquare(float x,float y, float size, boolean isStatic, World world, Color color) {
          //自定义形状
          PolygonShape polygon =new PolygonShape();
          polygon.setAsBox(size/2/RATE, size/2/RATE);
@@ -52,9 +54,8 @@ public class Box2DUtil {
          return new SquareBody(body,color);
      }
 
-    public static CircleBody createCircle(float x,float y, float rate, boolean isStatic, World world, int color){
+    /*public static CircleBody createCircle(float x,float y, float rate, boolean isStatic, World world, int color){
          CircleShape circleShape = new CircleShape();
          circleShape.m_radius = rate/ Constant.RATE;
-
-    }
+    }*/
 }

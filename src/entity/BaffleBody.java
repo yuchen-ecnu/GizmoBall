@@ -2,6 +2,7 @@ package entity;
 
 import entity.base.AbstractCustomBody;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -11,7 +12,7 @@ public class BaffleBody extends AbstractCustomBody {
     int type;
 
     @Override
-    public void drawSelf(Canvas canvas, Paint paint) {
+    public void drawSelf(JPanel boardPanel, Graphics g) {
 
     }
 }

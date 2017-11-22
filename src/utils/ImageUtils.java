@@ -23,4 +23,14 @@ public class ImageUtils {
 		imageIcon.setImage(image);
 		return imageIcon;
 	}
+
+	/**
+	 * 根据size及图片路径返回缩放后的Image
+	 * @return 错误返回null
+	 */
+	public static Image getImageNotIcon(String res,int width,int height){
+		ImageIcon imageIcon =new ImageIcon(MainFrame.class.getResource("../"+res));
+		Image image = imageIcon.getImage().getScaledInstance(width,height, Image.SCALE_DEFAULT);
+		return image;
+	}
 }
