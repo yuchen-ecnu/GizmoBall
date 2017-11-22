@@ -68,31 +68,27 @@ public class MainFrame extends JFrame {
 		setJMenuBar(menuBar);
 
 		JMenu mnFile = new JMenu("File");
-		menuBar.add(mnFile);
-
-		JMenuItem m_new = new JMenuItem("New");
-		mnFile.add(m_new);
-
+		JMenuItem mNew = new JMenuItem("New");
 		JMenuItem m_open = new JMenuItem("Open");
-		mnFile.add(m_open);
-
-		JMenuItem m_save = new JMenuItem("Save");
-		mnFile.add(m_save);
-
-		JMenuItem m_exit = new JMenuItem("Exit");
-		mnFile.add(m_exit);
-
+		JMenuItem mSave = new JMenuItem("Save");
+		JMenuItem mExit = new JMenuItem("Exit");
 		JMenu mnSetting = new JMenu("Setting");
-		menuBar.add(mnSetting);
-
-		JCheckBoxMenuItem m_checkCollision = new JCheckBoxMenuItem("Collision Effect");
-		mnSetting.add(m_checkCollision);
-
+		JCheckBoxMenuItem mCheckcollision = new JCheckBoxMenuItem("Collision Effect");
 		JMenu mnHelp = new JMenu("Help");
-		menuBar.add(mnHelp);
-
 		JMenuItem mntmAbout = new JMenuItem("About");
+
+		menuBar.add(mnFile);
+		mnFile.add(mNew);
+		mnFile.add(m_open);
+		mnFile.add(mSave);
+		mnFile.add(mExit);
+
+		menuBar.add(mnSetting);
+		mnSetting.add(mCheckcollision);
+
+		menuBar.add(mnHelp);
 		mnHelp.add(mntmAbout);
+
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -115,14 +111,14 @@ public class MainFrame extends JFrame {
 		operationPanel.add(advanceCompPanel);
 		advanceCompPanel.setLayout(null);
 
-		JButton button_3 = new JButton("");
-		button_3.setBorder(new LineBorder(Color.LIGHT_GRAY));
-		button_3.setContentAreaFilled(false);
-		button_3.setOpaque(false);
-		button_3.setBackground(Color.WHITE);
-		button_3.setBounds(30, 27, 40, 40);
-		button_3.setIcon(ImageUtils.getImage("stick_square.png", 30, 30));
-		advanceCompPanel.add(button_3);
+		JButton button3 = new JButton("");
+		button3.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		button3.setContentAreaFilled(false);
+		button3.setOpaque(false);
+		button3.setBackground(Color.WHITE);
+		button3.setBounds(30, 27, 40, 40);
+		button3.setIcon(ImageUtils.getImage("stick_square.png", 30, 30));
+		advanceCompPanel.add(button3);
 
 		JButton button_4 = new JButton("");
 		button_4.setBorder(new LineBorder(Color.LIGHT_GRAY));
@@ -269,6 +265,7 @@ public class MainFrame extends JFrame {
 		btnDonate.setIcon(ImageUtils.getImage("donate.png", 20, 20));
 		panel.add(btnDonate);
 		btnDonate.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				DonateDialog dialog = new DonateDialog(MainFrame.this);
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
