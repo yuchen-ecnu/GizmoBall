@@ -1,5 +1,6 @@
 package entity;
 
+import constant.Constant;
 import entity.base.AbstractCustomBody;
 import org.jbox2d.dynamics.Body;
 
@@ -10,8 +11,6 @@ import java.awt.*;
  * 挡板
  */
 public class BaffleBody extends AbstractCustomBody {
-    private int type;
-    private float size;
 
     public BaffleBody(Body body, int type, float size,Color color) {
         this.type = type;
@@ -21,7 +20,7 @@ public class BaffleBody extends AbstractCustomBody {
     }
 
     @Override
-    public void drawSelf(JPanel boardPanel, Graphics g) {
+    public void drawSelf(Graphics g) {
 
     }
 }

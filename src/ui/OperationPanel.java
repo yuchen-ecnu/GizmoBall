@@ -13,9 +13,27 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class OperationPanel extends JPanel {
+public class OperationPanel extends JPanel implements ActionListener{
 
     private OperationListener listener;
+
+    private JButton btnAdvanceSquare;
+    private JButton btnStick;
+    private JButton btnLeftFlipper;
+    private JButton btnRightFlipper;
+    private JButton btnAbsorber;
+    private JButton btnCircle;
+    private JButton btnTriangle;
+    private JButton btnTrapezoid;
+    private JButton btnSquare;
+    private JButton btnBall;
+    private JButton btnRotation;
+    private JButton btnDel;
+    private JButton btnPlay;
+    private JButton btnDonate;
+    private JButton btnPause;
+    private JSpinner bodySize;
+
     public OperationPanel(OperationListener listener){
         this.listener = listener;
 
@@ -30,52 +48,57 @@ public class OperationPanel extends JPanel {
         this.add(advanceCompPanel);
         advanceCompPanel.setLayout(null);
 
-        JButton button3 = new JButton("");
-        button3.setBorder(new LineBorder(Color.LIGHT_GRAY));
-        button3.setContentAreaFilled(false);
-        button3.setOpaque(false);
-        button3.setBackground(Color.WHITE);
-        button3.setBounds(31, 21, 40, 40);
-        button3.setIcon(ImageUtils.getImage("stick_square.png", 30, 30));
-        advanceCompPanel.add(button3);
+        btnAdvanceSquare = new JButton("");
+        btnAdvanceSquare.setBorder(new LineBorder(Color.LIGHT_GRAY));
+        btnAdvanceSquare.setContentAreaFilled(false);
+        btnAdvanceSquare.setOpaque(false);
+        btnAdvanceSquare.setBackground(Color.WHITE);
+        btnAdvanceSquare.setBounds(31, 21, 40, 40);
+        btnAdvanceSquare.setIcon(ImageUtils.getImage("stick_square.png", 30, 30));
+        btnAdvanceSquare.addActionListener(this);
+        advanceCompPanel.add(btnAdvanceSquare);
 
-        JButton button_4 = new JButton("");
-        button_4.setBorder(new LineBorder(Color.LIGHT_GRAY));
-        button_4.setContentAreaFilled(false);
-        button_4.setOpaque(false);
-        button_4.setBackground(Color.WHITE);
-        button_4.setBounds(95, 21, 40, 40);
-        button_4.setIcon(ImageUtils.getImage("stick.png", 30, 30));
-        advanceCompPanel.add(button_4);
+        btnStick = new JButton("");
+        btnStick.setBorder(new LineBorder(Color.LIGHT_GRAY));
+        btnStick.setContentAreaFilled(false);
+        btnStick.setOpaque(false);
+        btnStick.setBackground(Color.WHITE);
+        btnStick.setBounds(95, 21, 40, 40);
+        btnStick.setIcon(ImageUtils.getImage("stick.png", 30, 30));
+        btnStick.addActionListener(this);
+        advanceCompPanel.add(btnStick);
 
-        JButton button_5 = new JButton("");
-        button_5.setToolTipText("left board");
-        button_5.setBorder(new LineBorder(Color.LIGHT_GRAY));
-        button_5.setContentAreaFilled(false);
-        button_5.setOpaque(false);
-        button_5.setBackground(Color.WHITE);
-        button_5.setBounds(31, 71, 40, 40);
-        button_5.setIcon(ImageUtils.getImage("left_flipper.png", 30, 30));
-        advanceCompPanel.add(button_5);
+        btnLeftFlipper = new JButton("");
+        btnLeftFlipper.setToolTipText("left board");
+        btnLeftFlipper.setBorder(new LineBorder(Color.LIGHT_GRAY));
+        btnLeftFlipper.setContentAreaFilled(false);
+        btnLeftFlipper.setOpaque(false);
+        btnLeftFlipper.setBackground(Color.WHITE);
+        btnLeftFlipper.setBounds(31, 71, 40, 40);
+        btnLeftFlipper.setIcon(ImageUtils.getImage("left_flipper.png", 30, 30));
+        btnLeftFlipper.addActionListener(this);
+        advanceCompPanel.add(btnLeftFlipper);
 
-        JButton button_6 = new JButton("");
-        button_6.setBorder(new LineBorder(Color.LIGHT_GRAY));
-        button_6.setContentAreaFilled(false);
-        button_6.setOpaque(false);
-        button_6.setBackground(Color.WHITE);
-        button_6.setBounds(95, 71, 40, 40);
-        button_6.setIcon(ImageUtils.getImage("right_flipper.png", 30, 30));
-        advanceCompPanel.add(button_6);
+        btnRightFlipper = new JButton("");
+        btnRightFlipper.setBorder(new LineBorder(Color.LIGHT_GRAY));
+        btnRightFlipper.setContentAreaFilled(false);
+        btnRightFlipper.setOpaque(false);
+        btnRightFlipper.setBackground(Color.WHITE);
+        btnRightFlipper.setBounds(95, 71, 40, 40);
+        btnRightFlipper.setIcon(ImageUtils.getImage("right_flipper.png", 30, 30));
+        btnRightFlipper.addActionListener(this);
+        advanceCompPanel.add(btnRightFlipper);
 
-        JButton button_9 = new JButton("");
-        button_9.setToolTipText("Absorber,used to recycle balls");
-        button_9.setBorder(new LineBorder(Color.LIGHT_GRAY));
-        button_9.setContentAreaFilled(false);
-        button_9.setOpaque(false);
-        button_9.setBackground(Color.WHITE);
-        button_9.setBounds(31, 121, 40, 40);
-        button_9.setIcon(ImageUtils.getImage("absorber.png", 30, 30));
-        advanceCompPanel.add(button_9);
+        btnAbsorber = new JButton("");
+        btnAbsorber.setToolTipText("Absorber,used to recycle balls");
+        btnAbsorber.setBorder(new LineBorder(Color.LIGHT_GRAY));
+        btnAbsorber.setContentAreaFilled(false);
+        btnAbsorber.setOpaque(false);
+        btnAbsorber.setBackground(Color.WHITE);
+        btnAbsorber.setBounds(31, 121, 40, 40);
+        btnAbsorber.setIcon(ImageUtils.getImage("absorber.png", 30, 30));
+        btnAbsorber.addActionListener(this);
+        advanceCompPanel.add(btnAbsorber);
 
         JButton button_10 = new JButton("");
         button_10.setBorder(new LineBorder(Color.LIGHT_GRAY));
@@ -92,56 +115,55 @@ public class OperationPanel extends JPanel {
         this.add(basicCompoPanel);
         basicCompoPanel.setLayout(null);
 
-        JButton btnTrian = new JButton("");
-        btnTrian.setBorder(new LineBorder(Color.LIGHT_GRAY));
-        btnTrian.setContentAreaFilled(false);
-        btnTrian.setOpaque(false);
-        btnTrian.setBackground(Color.WHITE);
-        btnTrian.setBounds(28, 20, 40, 40);
-        btnTrian.setIcon(ImageUtils.getImage("circle.png", 30, 30));
-        basicCompoPanel.add(btnTrian);
-        btnTrian.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                listener.onItemAddListener(Constant.COMPONENT_CIRCLE);
-            }
-        });
+        btnCircle = new JButton("");
+        btnCircle.setBorder(new LineBorder(Color.LIGHT_GRAY));
+        btnCircle.setContentAreaFilled(false);
+        btnCircle.setOpaque(false);
+        btnCircle.setBackground(Color.WHITE);
+        btnCircle.setBounds(28, 20, 40, 40);
+        btnCircle.setIcon(ImageUtils.getImage("circle.png", 30, 30));
+        btnCircle.addActionListener(this);
+        basicCompoPanel.add(btnCircle);
 
-        JButton button = new JButton("");
-        button.setBorder(new LineBorder(Color.LIGHT_GRAY));
-        button.setContentAreaFilled(false);
-        button.setOpaque(false);
-        button.setBackground(Color.WHITE);
-        button.setBounds(92, 20, 40, 40);
-        button.setIcon(ImageUtils.getImage("triangle.png", 30, 30));
-        basicCompoPanel.add(button);
+        btnTriangle = new JButton("");
+        btnTriangle.setBorder(new LineBorder(Color.LIGHT_GRAY));
+        btnTriangle.setContentAreaFilled(false);
+        btnTriangle.setOpaque(false);
+        btnTriangle.setBackground(Color.WHITE);
+        btnTriangle.setBounds(92, 20, 40, 40);
+        btnTriangle.setIcon(ImageUtils.getImage("triangle.png", 30, 30));
+        btnTriangle.addActionListener(this);
+        basicCompoPanel.add(btnTriangle);
 
-        JButton button_1 = new JButton("");
-        button_1.setBorder(new LineBorder(Color.LIGHT_GRAY));
-        button_1.setContentAreaFilled(false);
-        button_1.setOpaque(false);
-        button_1.setBackground(Color.WHITE);
-        button_1.setBounds(92, 70, 40, 40);
-        button_1.setIcon(ImageUtils.getImage("trapezoid.png", 30, 30));
-        basicCompoPanel.add(button_1);
+        btnTrapezoid = new JButton("");
+        btnTrapezoid.setBorder(new LineBorder(Color.LIGHT_GRAY));
+        btnTrapezoid.setContentAreaFilled(false);
+        btnTrapezoid.setOpaque(false);
+        btnTrapezoid.setBackground(Color.WHITE);
+        btnTrapezoid.setBounds(92, 70, 40, 40);
+        btnTrapezoid.setIcon(ImageUtils.getImage("trapezoid.png", 30, 30));
+        btnTrapezoid.addActionListener(this);
+        basicCompoPanel.add(btnTrapezoid);
 
-        JButton button_2 = new JButton("");
-        button_2.setBorder(new LineBorder(Color.LIGHT_GRAY));
-        button_2.setContentAreaFilled(false);
-        button_2.setOpaque(false);
-        button_2.setBackground(Color.WHITE);
-        button_2.setBounds(28, 70, 40, 40);
-        button_2.setIcon(ImageUtils.getImage("square.png", 30, 30));
-        basicCompoPanel.add(button_2);
+        btnSquare = new JButton("");
+        btnSquare.setBorder(new LineBorder(Color.LIGHT_GRAY));
+        btnSquare.setContentAreaFilled(false);
+        btnSquare.setOpaque(false);
+        btnSquare.setBackground(Color.WHITE);
+        btnSquare.setBounds(28, 70, 40, 40);
+        btnSquare.setIcon(ImageUtils.getImage("square.png", 30, 30));
+        btnSquare.addActionListener(this);
+        basicCompoPanel.add(btnSquare);
 
-        JButton button_7 = new JButton("");
-        button_7.setBorder(new LineBorder(Color.LIGHT_GRAY));
-        button_7.setContentAreaFilled(false);
-        button_7.setOpaque(false);
-        button_7.setBackground(Color.WHITE);
-        button_7.setBounds(28, 120, 40, 40);
-        button_7.setIcon(ImageUtils.getImage("ball.png", 30, 30));
-        basicCompoPanel.add(button_7);
+        btnBall = new JButton("");
+        btnBall.setBorder(new LineBorder(Color.LIGHT_GRAY));
+        btnBall.setContentAreaFilled(false);
+        btnBall.setOpaque(false);
+        btnBall.setBackground(Color.WHITE);
+        btnBall.setBounds(28, 120, 40, 40);
+        btnBall.setIcon(ImageUtils.getImage("ball.png", 30, 30));
+        btnBall.addActionListener(this);
+        basicCompoPanel.add(btnBall);
 
         JButton button_8 = new JButton("");
         button_8.setBorder(new LineBorder(Color.LIGHT_GRAY));
@@ -158,61 +180,60 @@ public class OperationPanel extends JPanel {
         panel.setBounds(10, 365, 160, 235);
         this.add(panel);
 
-        JButton btnRotation = new JButton();
+        btnRotation = new JButton();
         btnRotation.setOpaque(false);
         btnRotation.setContentAreaFilled(false);
         btnRotation.setBorder(new LineBorder(Color.LIGHT_GRAY));
         btnRotation.setBackground(Color.WHITE);
         btnRotation.setBounds(29, 53, 40, 40);
         btnRotation.setIcon(ImageUtils.getImage("rotation.png", 30, 30));
+        btnRotation.addActionListener(this);
         panel.add(btnRotation);
 
-        JButton btnDel = new JButton();
+        btnDel = new JButton();
         btnDel.setOpaque(false);
         btnDel.setContentAreaFilled(false);
         btnDel.setBorder(new LineBorder(Color.LIGHT_GRAY));
         btnDel.setBackground(Color.WHITE);
         btnDel.setBounds(89, 53, 40, 40);
         btnDel.setIcon(ImageUtils.getImage("delete.png", 30, 30));
+        btnDel.addActionListener(this);
         panel.add(btnDel);
 
-        JButton btnPlay = new JButton("Play");
+        btnPlay = new JButton("Play");
         btnPlay.setOpaque(false);
         btnPlay.setContentAreaFilled(false);
         btnPlay.setBorder(new LineBorder(Color.LIGHT_GRAY));
         btnPlay.setBackground(Color.WHITE);
         btnPlay.setBounds(29, 103, 100, 30);
         btnPlay.setIcon(ImageUtils.getImage("start.png", 20, 20));
+        btnPlay.addActionListener(this);
+        btnPlay.setEnabled(true);
         panel.add(btnPlay);
 
-        JButton btnDonate = new JButton("Donate");
+        btnDonate = new JButton("Donate");
         btnDonate.setBounds(29, 183, 100, 28);
         btnDonate.setIcon(ImageUtils.getImage("donate.png", 20, 20));
+        btnCircle.addActionListener(this);
         panel.add(btnDonate);
-        btnDonate.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                DonateDialog dialog = new DonateDialog();
-                dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-                dialog.setVisible(true);
-            }
-        });
         btnDonate.setOpaque(false);
         btnDonate.setContentAreaFilled(false);
         btnDonate.setBorder(new LineBorder(Color.LIGHT_GRAY));
         btnDonate.setBackground(Color.WHITE);
 
-        JButton btnPause = new JButton("Pause");
+        btnPause = new JButton("Pause");
         btnPause.setOpaque(false);
         btnPause.setContentAreaFilled(false);
         btnPause.setBorder(new LineBorder(Color.LIGHT_GRAY));
         btnPause.setBackground(Color.WHITE);
         btnPause.setBounds(29, 143, 100, 28);
         btnPause.setIcon(ImageUtils.getImage("pause.png", 20, 20));
+        btnPause.addActionListener(this);
+        btnPause.setEnabled(false);
         panel.add(btnPause);
 
-        JSpinner bodySize = new JSpinner();
-        bodySize.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
+        bodySize = new JSpinner();
+        bodySize.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
         bodySize.setBounds(69, 21, 60, 22);
         JSpinner.NumberEditor editor = new JSpinner.NumberEditor(bodySize, "0");
         bodySize.setEditor(editor);
@@ -226,5 +247,56 @@ public class OperationPanel extends JPanel {
         JLabel lblSize = new JLabel("Size:");
         lblSize.setBounds(29, 24, 40, 15);
         panel.add(lblSize);
+    }
+
+
+    public int getComponentSize(){
+        return (int) bodySize.getValue();
+    }
+
+    /**
+     * 点击监听
+     * @param e
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JButton curBtn = (JButton) e.getSource();
+        if(curBtn== btnAdvanceSquare){
+            listener.onItemChoose(Constant.COMPONENT_ADVANCED_SQUARE);
+        }else if(curBtn==btnStick){
+            listener.onItemChoose(Constant.COMPONENT_ELASTIC_PLATE);
+        }else if(curBtn==btnLeftFlipper){
+            listener.onItemChoose(Constant.COMPONENT_LEFT_BAFFLE);
+        }else if(curBtn==btnCircle){
+            listener.onItemChoose(Constant.COMPONENT_CIRCLE);
+        }else if(curBtn==btnRightFlipper){
+            listener.onItemChoose(Constant.COMPONENT_RIGHT_BAFFLE);
+        }else if(curBtn==btnAbsorber){
+            listener.onItemChoose(Constant.COMPONENT_ABSORBER);
+        }else if(curBtn==btnTriangle){
+            listener.onItemChoose(Constant.COMPONENT_TRIANGLE);
+        }else if(curBtn==btnTrapezoid){
+            listener.onItemChoose(Constant.COMPONENT_TRAPEZOID);
+        }else if(curBtn==btnSquare){
+            listener.onItemChoose(Constant.COMPONENT_SQUARE);
+        }else if(curBtn==btnBall){
+            listener.onItemChoose(Constant.COMPONENT_BALL);
+        }else if(curBtn==btnRotation){
+            listener.onItemChoose(Constant.COMPONENT_ROTATION);
+        }else if(curBtn==btnDel){
+            listener.onItemChoose(Constant.COMPONENT_DELETE);
+        }else if(curBtn==btnPlay){
+            btnPlay.setEnabled(false);
+            btnPause.setEnabled(true);
+            listener.onOperationClicked(Constant.OPERATION_PLAY);
+        }else if(curBtn==btnPause){
+            btnPlay.setEnabled(true);
+            btnPause.setEnabled(false);
+            listener.onOperationClicked(Constant.OPERATION_PAUSE);
+        }else if(curBtn==btnDonate){
+            DonateDialog dialog = new DonateDialog();
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dialog.setVisible(true);
+        }
     }
 }

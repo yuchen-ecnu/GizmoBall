@@ -2,6 +2,7 @@ package entity;
 
 import constant.Constant;
 import entity.base.AbstractCustomBody;
+import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import utils.DrawUtils;
 
@@ -15,17 +16,19 @@ import java.awt.*;
  * @date 2017/11/21
  */
 public class SquareBody extends AbstractCustomBody{
-    private float size;
-
 
     public SquareBody(Body body,float size, Color color) {
         this.body = body;
         this.color = color;
         this.size = size;
+        this.type = Constant.COMPONENT_SQUARE;
     }
 
     @Override
-    public void drawSelf(JPanel boardPanel, Graphics g) {
-        DrawUtils.drawSquare(30,30,g,getSize());
+    public void drawSelf(Graphics g) {
+        Vec2 vec2 = body.getPosition();
+        float x = vec2.x - size/2.0f;
+        float y = vec2.y - size/2.0f;
+        DrawUtils.drawSquare(x,y,g,size);
     }
 }

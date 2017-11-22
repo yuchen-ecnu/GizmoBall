@@ -4,8 +4,15 @@ import listener.OperationListener;
 
 import javax.swing.*;
 
+/**
+ * @description 菜单栏
+ * @author Jack Chen
+ * @date 2017/11/23
+ */
 public class MenuBar extends JMenuBar {
+
     private OperationListener listener;
+
     public MenuBar(OperationListener listener) {
         this.listener = listener;
         JMenu mnFile = new JMenu("File");

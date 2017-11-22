@@ -3,27 +3,20 @@ package ui;
 import constant.Constant;
 import entity.base.AbstractCustomBody;
 import listener.OperationListener;
-import utils.ImageUtils;
 import utils.ScreenUtils;
 
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.border.TitledBorder;
-import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.NumberFormatter;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 /**
- * @description 主窗口
+ * @description UI主界面
  * @author Jack Chen
  * @date 2017/11/21
  *
- * //TODO: 优化代码
  */
 public class MainFrame extends JFrame {
 
@@ -59,7 +52,7 @@ public class MainFrame extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				point = e.getPoint();
-				listener.onItemPositionListener(point);
+				listener.onBorderClicked(point,operationPanel.getComponentSize());
 			}
 		});
 
@@ -67,7 +60,7 @@ public class MainFrame extends JFrame {
 		contentPane.add(operationPanel);
 	}
 
-	public void draw(AbstractCustomBody abstractCustomBody,Point point){
-		boardPanel.draw(abstractCustomBody,point);
+	public void repaintBoardPanel(List<AbstractCustomBody> components){
+		boardPanel.repaintBoard(components);
 	}
 }

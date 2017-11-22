@@ -15,11 +15,24 @@ import java.awt.*;
 public abstract class AbstractCustomBody {
     protected Body body;      //JBox2D物理引擎中的刚体(Body)
     protected Color color;      //刚体的颜色
-    protected int size;       //物体的大小为size*格子边长
+    protected int type;       //物体类型
+    protected float size;       //物体尺寸，可以是半径或者边长
 
-    public int getSize() {
+    public int getType() {
+        return type;
+    }
+
+    public Body getBody() {
+        return body;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public float getSize() {
         return size;
     }
 
-    public abstract void drawSelf(JPanel boardPanel, Graphics g);
+    public abstract void drawSelf(Graphics g);
 }

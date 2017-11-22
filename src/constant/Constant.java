@@ -9,17 +9,18 @@ import java.awt.*;
  */
 public class Constant {
 
-    //比例尺
-    public static final float RATE = 10;
+    /**比例尺*/
+    public static final float RATE = 1;
 
-    //迭代次数
+    /**迭代次数*/
     public static final int ITERA = 10;
 
-    //模拟的频率
-    public static final float TIME_STEP = 2.0f/60.0f;
-
-    //绘制线程工作标志位
-    public static final boolean DRAW_THREAD_FLAG = true;
+    /**模拟的频率*/
+    public static final float TIME_STEP = 1.0f / 60.0f;
+    public static final int VELOCITY_ITERATION = 6;
+    public static final int POSITION_ITERATION = 2;
+    /**绘制线程工作标志位*/
+    public static boolean DRAW_THREAD_FLAG = false;
 
     public static final int BOARD_SIZE = 600;
     public static final int GRID_COUNT = 20;
@@ -31,22 +32,32 @@ public class Constant {
     public static final int WINDOW_DONATE_HEIGHT = 562;
     public static final String IMG_DONATE = "donate.jpg";
 
-    //操作类型
+    /**Gizmo类型定义*/
     public static final int COMPONENT_CIRCLE = 1;
     public static final int COMPONENT_TRIANGLE = 2;
     public static final int COMPONENT_SQUARE = 3;
     public static final int COMPONENT_TRAPEZOID = 4;
     public static final int COMPONENT_BALL = 5;
     public static final int COMPONENT_ADVANCED_SQUARE = 6;
-    public static final int COMPONENT_BAFFLE = 7;
+    public static final int COMPONENT_ELASTIC_PLATE = 7;
+    public static final int COMPONENT_LEFT_BAFFLE = 8;
+    public static final int COMPONENT_RIGHT_BAFFLE = 9;
+    public static final int COMPONENT_ABSORBER = 10;
 
+    /**操作类型定义*/
+    public static final int COMPONENT_ROTATION = 11;
+    public static final int COMPONENT_DELETE = 12;
 
-    //颜色
-    public static final Color CIRCLE_COLOR = new Color(98,169,241);
-    public static final Color TRIANGLE_COLOR = new Color(247,126,110);
-    public static final Color SQUARE_COLOR = new Color(1,177,175);
-    public static final Color TRAPEZOID_COLOR = new Color(243,202,126);
-    public static final Color BALL_COLOR = new Color(188,187,194);
-    public static final Color STICK_SQUARE_COLOR = new Color(232,152,154);
-    public static final Color STICK_COLOR = new Color(243,202,126);
+    /**游戏操作定义*/
+    public static final int OPERATION_PLAY = 0;
+    public static final int OPERATION_PAUSE = 1;
+
+    /**颜色常量*/
+    public static final Color COLOR_CIRCLE = new Color(98,169,241);
+    public static final Color COLOR_TRIANGLE = new Color(247,126,110);
+    public static final Color COLOR_SQUARE = new Color(1,177,175);
+    public static final Color COLOR_TRAPEZOID = new Color(243,202,126);
+    public static final Color COLOR_BALL = new Color(188,187,194);
+    public static final Color COLOR_ADVANCE_SQUARE = new Color(232,152,154);
+    public static final Color COLOR_STICK = new Color(243,202,126);
 }

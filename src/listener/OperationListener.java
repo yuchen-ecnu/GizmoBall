@@ -1,10 +1,10 @@
 package listener;
 
-import entity.base.AbstractCustomBody;
-
 import java.awt.*;
 
 public interface OperationListener {
-    void onItemAddListener(int type);
-    void onItemPositionListener(Point point);
+    void onItemChoose(int type);
+    void onOperationClicked(int type);
+    void onBorderClicked(Point point,int size);
+    void onRepaintBoard();
 }

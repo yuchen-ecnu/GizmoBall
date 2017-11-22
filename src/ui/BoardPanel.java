@@ -1,14 +1,14 @@
 package ui;
 
 import constant.Constant;
-import entity.CircleBody;
 import entity.base.AbstractCustomBody;
 import listener.OperationListener;
-import entity.CircleBody;
+import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
-import utils.DrawUtils;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -20,11 +20,14 @@ import javax.swing.JPanel;
 public class BoardPanel extends JPanel {
 
 	private OperationListener listener;
-	private Point p = new Point();
+	private Point point;
+	private List<AbstractCustomBody> components;
 
 
 	public BoardPanel(OperationListener listener) {
 		this.listener = listener;
+		this.point= new Point();
+		this.components = new ArrayList<>();
 		setBackground(Color.BLACK);
 		setBounds(10, 10, Constant.BOARD_SIZE, Constant.BOARD_SIZE);
 		setLayout(new GridLayout(200, 200, 0, 0));
@@ -34,8 +37,14 @@ public class BoardPanel extends JPanel {
 	public void paint(Graphics g) {
 		super.paint(g);
 		drawBoard(g);
-		DrawUtils.drawCircle(p.x,p.y,g,(Constant.BOARD_SIZE / Constant.GRID_COUNT));
+		drawComponent(g);
 	}
+
+	private void drawComponent(Graphics g) {
+        for (AbstractCustomBody abstractCustomBody : components) {
+            abstractCustomBody.drawSelf(g);
+        }
+    }
 
 	private void drawBoard(Graphics g) {
 		g.setColor(Color.WHITE);
@@ -50,11 +59,9 @@ public class BoardPanel extends JPanel {
         }
 	}
 
-	public void draw(AbstractCustomBody abstractCustomBody,Point point){
-		point.x = point.x / (Constant.BOARD_SIZE/Constant.GRID_COUNT ) * (Constant.BOARD_SIZE/Constant.GRID_COUNT);
-		point.y = point.y / (Constant.BOARD_SIZE/Constant.GRID_COUNT ) * (Constant.BOARD_SIZE/Constant.GRID_COUNT);
-		this.p = point;
-		repaint();
-	}
 
+    public void repaintBoard(List<AbstractCustomBody> components) {
+        this.components = components;
+        repaint();
+    }
 }

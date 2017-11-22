@@ -11,7 +11,7 @@ import java.awt.*;
 
 
 /**
- * @description 刚体生成类（所有数据均为现实世界参数，内部自行转化）
+ * @description 刚体生成类（内部将按照比例尺转化）
  * @author Jack Chen
  * @date 2017/11/21
  */

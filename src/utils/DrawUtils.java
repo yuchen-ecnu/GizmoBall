@@ -2,17 +2,17 @@ package utils;
 
 import constant.Constant;
 
-import javax.swing.*;
 import java.awt.*;
 
 public class DrawUtils {
 
-    public static void drawCircle(int x,int y, Graphics g,int size) {
-        g.setColor(Constant.CIRCLE_COLOR);
-        g.fillOval(x,y,size,size);
+    public static void drawCircle(float x,float y, Graphics g,float radious) {
+        g.setColor(Constant.COLOR_CIRCLE);
+        g.fillOval((int) x,(int) y, (int) radious, (int) radious);
     }
-    public static void drawSquare(int x,int y, Graphics g,int size) {
-        g.setColor(Constant.SQUARE_COLOR);
-        g.fillRect(x,y,size,size);
+
+    public static void drawSquare(float x,float y, Graphics g,float size) {
+        g.setColor(Constant.COLOR_SQUARE);
+        g.fillRect((int) x,(int) y,(int) size,(int) size);
     }
 }

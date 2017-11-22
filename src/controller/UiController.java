@@ -1,13 +1,8 @@
 package controller;
 
-import entity.AbsorberBody;
-import entity.CircleBody;
-import entity.base.AbstractCustomBody;
-import javafx.scene.layout.BorderPane;
+import constant.Constant;
 import listener.OperationListener;
 import listener.UiListener;
-import ui.BoardPanel;
-import ui.DonateDialog;
 import ui.MainFrame;
 
 import java.awt.*;
@@ -20,28 +15,37 @@ import java.awt.*;
 public class UiController implements OperationListener{
     private MainFrame mainFrame;
     private UiListener uiListener;
-    private AbstractCustomBody abstractCustomBody;
+    private int curType;
 
     public UiController(UiListener uiListener) {
         this.uiListener = uiListener;
+        curType = 0;
         mainFrame = new MainFrame(this);
         mainFrame.setVisible(true);
     }
 
     @Override
-    public void onItemAddListener(int type) {
-        switch (type) {
-            case 1:
-                break;
-            default:
-                break;
+    public void onItemChoose(int type) {
+        curType = type;
+    }
+
+    @Override
+    public void onOperationClicked(int type) {
+        uiListener.onOperationClicked(type);
+    }
+
+    @Override
+    public void onBorderClicked(Point point,int size){
+        if(curType!=0){
+            int unitSize = Constant.BOARD_SIZE/Constant.GRID_COUNT;
+            point.x = point.x/unitSize;
+            point.y = point.y/unitSize;
+            mainFrame.repaintBoardPanel(uiListener.onItemAdd(point,curType,size));
         }
     }
 
     @Override
-    public void onItemPositionListener(Point point){
-        if(uiListener.onItemAdd(point)){
-            mainFrame.draw(abstractCustomBody,point);
-        }
+    public void onRepaintBoard() {
+        mainFrame.repaintBoardPanel(uiListener.componentInfoProvider());
     }
 }
