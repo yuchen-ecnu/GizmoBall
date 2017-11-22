@@ -14,15 +14,11 @@ import java.awt.*;
  * @date 2017/11/21
  */
 public class SquareBody extends AbstractCustomBody{
+    private float size;
 
 
-    public SquareBody(Body body, Color color,int size) {
+    public SquareBody(Body body,float size, Color color) {
         this.body = body;
-        this.color = color;
-        this.size = size;
-    }
-
-    public SquareBody(Color color,int size) {
         this.color = color;
         this.size = size;
     }

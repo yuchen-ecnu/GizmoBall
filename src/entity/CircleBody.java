@@ -2,24 +2,21 @@ package entity;
 
 import constant.Constant;
 import entity.base.AbstractCustomBody;
-import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
-import utils.ImageUtils;
 
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * 圆形
+ */
 public class CircleBody extends AbstractCustomBody {
+    private float radious;
 
-    public CircleBody(Body body,Color color,int size){
+    public CircleBody(Body body, float radious, Color color) {
+        this.radious = radious;
+        this.color = color;
         this.body = body;
-        this.color = color;
-        this.size = size;
-    }
-
-    public CircleBody(Color color,int size){
-        this.color = color;
-        this.size = size;
     }
 
     @Override

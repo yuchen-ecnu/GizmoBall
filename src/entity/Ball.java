@@ -12,6 +12,13 @@ import java.awt.*;
  * 球
  */
 public class Ball extends AbstractCustomBody {
+    private float radius;
+
+    public Ball(Body body, float radius, Color color) {
+        this.radius = radius;
+        this.body = body;
+        this.color = color;
+    }
 
     @Override
     public void drawSelf(JPanel boardPanel, Graphics g) {

@@ -12,7 +12,13 @@ import java.awt.*;
  * 吸收器
  */
 public class AbsorberBody extends AbstractCustomBody {
+    private float radious;
 
+    public AbsorberBody(Body body, float radious,Color color) {
+        this.radious = radious;
+        this.body = body;
+        this.color = color;
+    }
 
     @Override
     public void drawSelf(JPanel boardPanel, Graphics g) {
