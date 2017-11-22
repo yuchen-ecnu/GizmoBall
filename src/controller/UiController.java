@@ -32,7 +32,6 @@ public class UiController implements OperationListener{
     public void onItemAddListener(int type) {
         switch (type) {
             case 1:
-                abstractCustomBody = new CircleBody();
                 break;
             default:
                 break;

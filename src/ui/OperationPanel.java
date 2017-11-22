@@ -100,7 +100,7 @@ public class OperationPanel extends JPanel {
         btnTrian.setBounds(28, 20, 40, 40);
         btnTrian.setIcon(ImageUtils.getImage("circle.png", 30, 30));
         basicCompoPanel.add(btnTrian);
-       btnTrian.addActionListener(new ActionListener() {
+        btnTrian.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 listener.onItemAddListener(Constant.COMPONENT_CIRCLE);

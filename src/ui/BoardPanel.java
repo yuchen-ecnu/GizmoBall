@@ -2,11 +2,13 @@ package ui;
 
 import constant.Constant;
 import entity.CircleBody;
+import entity.base.AbstractCustomBody;
+import listener.OperationListener;
+import entity.CircleBody;
 import org.jbox2d.dynamics.Body;
+import utils.DrawUtils;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.GridLayout;
+import java.awt.*;
 
 import javax.swing.JPanel;
 
@@ -17,7 +19,12 @@ import javax.swing.JPanel;
  */
 public class BoardPanel extends JPanel {
 
-	public BoardPanel() {
+	private OperationListener listener;
+	private Point p = new Point();
+
+
+	public BoardPanel(OperationListener listener) {
+		this.listener = listener;
 		setBackground(Color.BLACK);
 		setBounds(10, 10, Constant.BOARD_SIZE, Constant.BOARD_SIZE);
 		setLayout(new GridLayout(200, 200, 0, 0));
@@ -26,20 +33,28 @@ public class BoardPanel extends JPanel {
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
+		drawBoard(g);
+		DrawUtils.drawCircle(p.x,p.y,g,(Constant.BOARD_SIZE / Constant.GRID_COUNT));
+	}
+
+	private void drawBoard(Graphics g) {
 		g.setColor(Color.WHITE);
 		//绘制列
-		int size = Constant.BOARD_SIZE / Constant.GRID_COUNT ; 
-		for(int i =0;i<Constant.BOARD_SIZE;i+=size){
-			g.drawLine(i, 0, i, Constant.BOARD_SIZE);
-		}
+		int size = Constant.BOARD_SIZE / Constant.GRID_COUNT;
+		for (int i = 0; i < Constant.BOARD_SIZE; i += size) {
+            g.drawLine(i, 0, i, Constant.BOARD_SIZE);
+        }
 		//绘制行
-		for(int i =0;i<Constant.BOARD_SIZE;i+=size){
-			g.drawLine(0, i, Constant.BOARD_SIZE, i);
-		}
-
-        SquareBody circleBody = new SquareBody(Constant.CIRCLE_COLOR,2);
-        circleBody.drawSelf(this,g);
+		for (int i = 0; i < Constant.BOARD_SIZE; i += size) {
+            g.drawLine(0, i, Constant.BOARD_SIZE, i);
+        }
 	}
-	
+
+	public void draw(AbstractCustomBody abstractCustomBody,Point point){
+		point.x = point.x / (Constant.BOARD_SIZE/Constant.GRID_COUNT ) * (Constant.BOARD_SIZE/Constant.GRID_COUNT);
+		point.y = point.y / (Constant.BOARD_SIZE/Constant.GRID_COUNT ) * (Constant.BOARD_SIZE/Constant.GRID_COUNT);
+		this.p = point;
+		repaint();
+	}
 
 }
