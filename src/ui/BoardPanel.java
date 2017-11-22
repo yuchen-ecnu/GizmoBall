@@ -2,6 +2,7 @@ package ui;
 
 import constant.Constant;
 import entity.CircleBody;
+import entity.SquareBody;
 import org.jbox2d.dynamics.Body;
 
 import java.awt.Color;
@@ -37,7 +38,7 @@ public class BoardPanel extends JPanel {
 			g.drawLine(0, i, Constant.BOARD_SIZE, i);
 		}
 
-        CircleBody circleBody = new CircleBody(Constant.CIRCLE_COLOR,1);
+        SquareBody circleBody = new SquareBody(Constant.CIRCLE_COLOR,2);
         circleBody.drawSelf(this,g);
 	}
 	

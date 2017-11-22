@@ -17,5 +17,9 @@ public abstract class AbstractCustomBody {
     protected Color color;      //刚体的颜色
     protected int size;       //物体的大小为size*格子边长
 
+    public int getSize() {
+        return size;
+    }
+
     public abstract void drawSelf(JPanel boardPanel, Graphics g);
 }
