@@ -31,8 +31,7 @@ public class DonateDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public DonateDialog(JFrame frame) {
-		super(frame);
+	public DonateDialog() {
 		setResizable(false);
 		setSize(Constant.WINDOW_DONATE_WIDTH, Constant.WINDOW_DONATE_HEIGHT);
 		Dimension midDimension = ScreenUtils.getScreenMidDimension(this);

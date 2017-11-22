@@ -2,7 +2,6 @@ package ui;
 
 import constant.Constant;
 import entity.CircleBody;
-import entity.SquareBody;
 import org.jbox2d.dynamics.Body;
 
 import java.awt.Color;
