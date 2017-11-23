@@ -43,8 +43,8 @@ public class UiController implements OperationListener{
     public void onBorderClicked(Point point,int size){
         if(curType!=0){
             int unitSize = Constant.BOARD_SIZE/Constant.GRID_COUNT;
-            point.x = point.x/unitSize -1;
-            point.y = point.y/unitSize -1;
+            point.x = point.x/unitSize;
+            point.y = point.y/unitSize;
             mainFrame.repaintBoardPanel(uiListener.onItemAdd(point,curType,size));
         }
     }

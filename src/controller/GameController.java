@@ -26,15 +26,9 @@ public class GameController implements UiListener{
         //创建 重力加速度为10 的世界
         world = new World(new Vec2(0.0f,10.0f));
         //创建边界
-        createBoundary();
+        Box2DUtil.createBoarder(Constant.GRID_COUNT,Constant.GRID_COUNT,world);
     }
 
-    /**
-     * 创建边界
-     */
-    private void createBoundary() {
-
-    }
     public boolean isEmpty(int x, int y, int size) {
         for (int i = x; i < x + size; i++) {
             for (int j = y; j < y + size; j++) {

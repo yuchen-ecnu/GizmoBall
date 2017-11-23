@@ -42,13 +42,13 @@ public class Box2DUtil {
         //摩擦因子
         fDef.friction=1.0f;
         //恢复系数
-        fDef.restitution=1.0f;
+        fDef.restitution=2.0f;
         fDef.shape=polygon;
 
         //创建刚体
         BodyDef bodyDef=new BodyDef();
         bodyDef.type=isStatic? BodyType.STATIC:BodyType.DYNAMIC;
-        bodyDef.position.set((x+size)/Constant.RATE,(y+size)/Constant.RATE);
+        bodyDef.position.set(x/Constant.RATE + r,y/Constant.RATE + r);
 
         Body body=world.createBody(bodyDef);
         body.createFixture(fDef);
@@ -198,7 +198,7 @@ public class Box2DUtil {
      */
     public static CircleBody createCircle(float x,float y, float radius, boolean isStatic, World world, Color color){
         CircleShape circleShape = new CircleShape();
-        circleShape.m_radius = radius/ Constant.RATE;
+        circleShape.m_radius = radius / Constant.RATE;
         //配置物体属性参数
         FixtureDef fDef=new FixtureDef();
         if(isStatic) {
@@ -271,8 +271,8 @@ public class Box2DUtil {
     public static Ball createBall(float x, float y, float radius, World world, Color color){
         CircleShape ballShape = new CircleShape();
 
-        float r = radius / Constant.RATE;
-        ballShape.m_radius = r;
+        float r = radius / 2.0f / Constant.RATE;
+        ballShape.setRadius(r);
         //配置物体属性参数
         FixtureDef fDef=new FixtureDef();
         fDef.density=1;
@@ -285,7 +285,7 @@ public class Box2DUtil {
         //创建刚体
         BodyDef bodyDef=new BodyDef();
         bodyDef.type = BodyType.DYNAMIC;
-        bodyDef.position.set((x+radius)/ Constant.RATE,(y+radius)/Constant.RATE);
+        bodyDef.position.set(x / Constant.RATE + r ,y / Constant.RATE + r);
         Body body=world.createBody(bodyDef);
         body.createFixture(fDef);
         return new Ball(body,r,color);
@@ -328,7 +328,48 @@ public class Box2DUtil {
         return new TrapezoidBody(body,size/Constant.RATE,color);
     }
 
-    public static void createBoarder(float x, float y, float size,World world){
+    /**
+     * 创建世界的边界
+     * @param x 边界的宽
+     * @param y 边界的高
+     * @param world 所属虚拟世界
+     */
+    public static void createBoarder(float x, float y, World world){
+        //自定义形状
+        PolygonShape horizontalShape =new PolygonShape();
+        PolygonShape verticalShape =new PolygonShape();
+        horizontalShape.setAsBox(x/2.0f/Constant.RATE, 0);
+        verticalShape.setAsBox(0, y/2.0f/Constant.RATE);
+        //配置物体属性参数
+        FixtureDef fDef=new FixtureDef();
+        //创建刚体
+        BodyDef bodyDef=new BodyDef();
+        bodyDef.type=BodyType.STATIC;
+
+        fDef.density=0;
+        //摩擦因子
+        fDef.friction=1.0f;
+        //恢复系数
+        fDef.restitution=1.0f;
+
+        //Top
+        bodyDef.position.set(x/2.0f/Constant.RATE,0);
+        fDef.shape=horizontalShape;
+        Body body=world.createBody(bodyDef);
+        body.createFixture(fDef);
+        //Bottom
+        bodyDef.position.set(x/2.0f/Constant.RATE,y/Constant.RATE);
+        body=world.createBody(bodyDef);
+        body.createFixture(fDef);
+        //Left
+        bodyDef.position.set(0,y/2.0f/Constant.RATE);
+        fDef.shape=verticalShape;
+        body=world.createBody(bodyDef);
+        body.createFixture(fDef);
+        //Right
+        bodyDef.position.set(x/Constant.RATE,y/2.0f/Constant.RATE);
+        body=world.createBody(bodyDef);
+        body.createFixture(fDef);
 
     }
 

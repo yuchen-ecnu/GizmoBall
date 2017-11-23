@@ -25,8 +25,8 @@ public class Ball extends AbstractCustomBody {
     public void drawSelf(Graphics g) {
         Vec2 vec2 = body.getPosition();
         float size = this.size;
-        float x = vec2.x;
-        float y = vec2.y;
+        float x = vec2.x-size;
+        float y = vec2.y-size;
         int unitSize = Constant.BOARD_SIZE/Constant.GRID_COUNT;
         DrawUtils.drawCircle(x*Constant.RATE*unitSize,y*Constant.RATE*unitSize,g,size*Constant.RATE*unitSize);
     }
