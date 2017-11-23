@@ -12,6 +12,7 @@ import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.World;
 import org.jbox2d.dynamics.contacts.Contact;
 import utils.Box2DUtil;
+import utils.FileUtils;
 
 import java.awt.*;
 import java.io.File;
@@ -163,28 +164,12 @@ public class GameController implements UiListener, ContactListener {
         }else if(type == Constant.MENUBAR_FILE_EXIT){
             System.exit(0);
         }else if(type == Constant.MENUBAR_FILE_SAVE){
-            for(int i = 0; i < components.size(); i++) {
-                writeObjectToFile(components.get(i));
-            }
+            FileUtils.writeToFile(components);
+        }else if(type == Constant.MENUBAR_FILE_OPEN){
+            FileUtils.readFromFile();
         }
     }
 
-    public static void writeObjectToFile(AbstractCustomBody abstractCustomBody)
-    {
-        File file =new File("test.dat");
-        FileOutputStream out;
-        try {
-            out = new FileOutputStream(file);
-            ObjectOutputStream objOut=new ObjectOutputStream(out);
-            objOut.writeObject(abstractCustomBody);
-            objOut.flush();
-            objOut.close();
-            System.out.println("write object success!");
-        } catch (IOException e) {
-            System.out.println("write object failed");
-            e.printStackTrace();
-        }
-    }
 
     @Override
     public void beginContact(Contact contact) {
@@ -214,4 +199,5 @@ public class GameController implements UiListener, ContactListener {
     public void postSolve(Contact contact, ContactImpulse contactImpulse) {
 
     }
+
 }
