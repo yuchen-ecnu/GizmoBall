@@ -26,7 +26,7 @@ public class DrawThread extends Thread {
             world.step(Constant.TIME_STEP,Constant.VELOCITY_ITERATION,Constant.POSITION_ITERATION);
             operationListener.onRepaintBoard();
             try {
-                Thread.sleep(40);
+                Thread.sleep(20);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

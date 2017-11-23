@@ -29,6 +29,13 @@ public class GameController implements UiListener{
         Box2DUtil.createBoarder(Constant.GRID_COUNT,Constant.GRID_COUNT,world);
     }
 
+    /**
+     * 判断当前位置是否为空
+     * @param x 坐标x
+     * @param y 坐标y
+     * @param size size大小
+     * @return
+     */
     public boolean isEmpty(int x, int y, int size) {
         for (int i = x; i < x + size; i++) {
             for (int j = y; j < y + size; j++) {
@@ -40,17 +47,22 @@ public class GameController implements UiListener{
         return true;
     }
 
+    /**
+     * 根据坐标获取组件（第一个被添加的）
+     * @param x 坐标x
+     * @param y 坐标y
+     * @return
+     */
     private AbstractCustomBody getComponent(int x,int y) {
-        //TODO:
-//        for (int i = 0; i < components.size(); i++) {
-//            AbstractCustomBody temp = components.get(i);
-//            int tempX = temp.getX();
-//            int tempY = temp.getY();
-//            int sizeRate = temp.getSizeRate();
-//            if (x >= tempX && x < tempX + sizeRate && y >= tempY && y < tempY + sizeRate){
-//                return temp;
-//            }
-//        }
+        for (int i = 0; i < components.size(); i++) {
+            AbstractCustomBody comp = components.get(i);
+            float size = comp.getSize()*Constant.RATE;
+            float x1 = comp.getBody().getPosition().x*Constant.RATE-size;
+            float y1 = comp.getBody().getPosition().y*Constant.RATE-size;
+            if (x >= x1 && x < x1 + size*2 && y >= y1 && y < y1 + size*2){
+                return comp;
+            }
+        }
         return null;
     }
 
@@ -67,7 +79,7 @@ public class GameController implements UiListener{
                     components.add(triangleBody);
                     break;
                 case Constant.COMPONENT_SQUARE:
-                    SquareBody squareBody = Box2DUtil.createSquare(point.x,point.y,size,true,world,Constant.COLOR_SQUARE);
+                    SquareBody squareBody = Box2DUtil.createSquare(point.x,point.y,size,world,Constant.COLOR_SQUARE);
                     components.add(squareBody);
                     break;
                 case Constant.COMPONENT_TRAPEZOID:
@@ -75,7 +87,7 @@ public class GameController implements UiListener{
                     components.add(trapezoidBody);
                     break;
                 case Constant.COMPONENT_BALL:
-                    Ball ball = Box2DUtil.createBall(point.x,point.y,size,world,Constant.COLOR_SQUARE);
+                    Ball ball = Box2DUtil.createBall(point.x,point.y,world,Constant.COLOR_SQUARE);
                     components.add(ball);
                     break;
                 case Constant.COMPONENT_ADVANCED_SQUARE:

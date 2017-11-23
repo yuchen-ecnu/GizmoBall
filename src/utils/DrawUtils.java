@@ -15,4 +15,8 @@ public class DrawUtils {
         g.setColor(Constant.COLOR_SQUARE);
         g.fillRect((int) x,(int) y,(int) size,(int) size);
     }
+
+    public static void drawBall(float x,float y, Graphics g) {
+        g.drawImage(Constant.IMAGE_BALL,(int)x,(int)y,null);
+    }
 }

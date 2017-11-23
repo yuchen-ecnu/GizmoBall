@@ -6,7 +6,6 @@ import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import utils.DrawUtils;
 
-import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -28,6 +27,6 @@ public class Ball extends AbstractCustomBody {
         float x = vec2.x-size;
         float y = vec2.y-size;
         int unitSize = Constant.BOARD_SIZE/Constant.GRID_COUNT;
-        DrawUtils.drawCircle(x*Constant.RATE*unitSize,y*Constant.RATE*unitSize,g,size*Constant.RATE*unitSize);
+        DrawUtils.drawBall(x*Constant.RATE*unitSize,y*Constant.RATE*unitSize,g);
     }
 }

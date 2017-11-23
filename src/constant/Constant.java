@@ -1,5 +1,7 @@
 package constant;
 
+import utils.ImageUtils;
+
 import java.awt.*;
 
 /**
@@ -12,18 +14,19 @@ public class Constant {
     /**比例尺(网格 : 模拟)*/
     public static final float RATE = 1.0f / 10.0f;
 
-    /**迭代次数*/
-    public static final int ITERA = 10;
-
     /**模拟的频率*/
     public static final float TIME_STEP = 1.0f / 30.0f;
     public static final int VELOCITY_ITERATION = 6;
     public static final int POSITION_ITERATION = 2;
+
     /**绘制线程工作标志位*/
     public static boolean DRAW_THREAD_FLAG = false;
 
     public static final int BOARD_SIZE = 600;
     public static final int GRID_COUNT = 20;
+
+    public static final int BALL_SIZE = BOARD_SIZE/GRID_COUNT;
+    public static final int COMPONENT_DESTINY = 100;
 
     public static final int WINDOW_MAIN_WIDTH = 852;
     public static final int WINDOW_MAIN_HEIGHT = 680;
@@ -60,4 +63,6 @@ public class Constant {
     public static final Color COLOR_BALL = new Color(188,187,194);
     public static final Color COLOR_ADVANCE_SQUARE = new Color(232,152,154);
     public static final Color COLOR_STICK = new Color(243,202,126);
+
+    public static final Image IMAGE_BALL = ImageUtils.getImageNotIcon("ball.png",BALL_SIZE,BALL_SIZE);
 }

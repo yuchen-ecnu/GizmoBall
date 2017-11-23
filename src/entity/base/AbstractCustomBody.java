@@ -13,10 +13,14 @@ import java.awt.*;
  * @date 2017/11/21
  */
 public abstract class AbstractCustomBody {
-    protected Body body;      //JBox2D物理引擎中的刚体(Body)
-    protected Color color;      //刚体的颜色
-    protected int type;       //物体类型
-    protected float size;       //物体尺寸，可以是半径或者边长
+    /**JBox2D物理引擎中的刚体(Body)*/
+    protected Body body;
+    /**刚体的颜色*/
+    protected Color color;
+    /**物体类型*/
+    protected int type;
+    /**物体尺寸，可以是半径或者边长*/
+    protected float size;
 
     public int getType() {
         return type;
