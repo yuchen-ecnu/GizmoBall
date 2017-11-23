@@ -1,5 +1,6 @@
 package utils;
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import constant.Constant;
 import entity.*;
 import org.jbox2d.collision.shapes.CircleShape;
@@ -47,7 +48,7 @@ public class Box2DUtil {
         //创建刚体
         BodyDef bodyDef=new BodyDef();
         bodyDef.type=isStatic? BodyType.STATIC:BodyType.DYNAMIC;
-        bodyDef.position.set(x+r,y+r);
+        bodyDef.position.set((x+size)/Constant.RATE,(y+size)/Constant.RATE);
 
         Body body=world.createBody(bodyDef);
         body.createFixture(fDef);
@@ -284,7 +285,7 @@ public class Box2DUtil {
         //创建刚体
         BodyDef bodyDef=new BodyDef();
         bodyDef.type = BodyType.DYNAMIC;
-        bodyDef.position.set(x+r,y+r);
+        bodyDef.position.set((x+radius)/ Constant.RATE,(y+radius)/Constant.RATE);
         Body body=world.createBody(bodyDef);
         body.createFixture(fDef);
         return new Ball(body,r,color);
@@ -327,7 +328,9 @@ public class Box2DUtil {
         return new TrapezoidBody(body,size/Constant.RATE,color);
     }
 
+    public static void createBoarder(float x, float y, float size,World world){
 
+    }
 
 
 }

@@ -16,7 +16,7 @@ public class Constant {
     public static final int ITERA = 10;
 
     /**模拟的频率*/
-    public static final float TIME_STEP = 1.0f / 60.0f;
+    public static final float TIME_STEP = 1.0f / 30.0f;
     public static final int VELOCITY_ITERATION = 6;
     public static final int POSITION_ITERATION = 2;
     /**绘制线程工作标志位*/
