@@ -16,7 +16,7 @@ public class TriangleBody extends AbstractCustomBody {
         this.size = size;
         this.color = color;
         this.body = body;
-        this.type = Constant.COMPONENT_TRIANGLE;
+        body.setUserData(Constant.COMPONENT_TRIANGLE);
     }
 
     @Override

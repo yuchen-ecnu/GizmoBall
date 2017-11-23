@@ -282,9 +282,9 @@ public class OperationPanel extends JPanel implements ActionListener{
         }else if(curBtn==btnBall){
             listener.onItemChoose(Constant.COMPONENT_BALL);
         }else if(curBtn==btnRotation){
-            listener.onItemChoose(Constant.COMPONENT_ROTATION);
+            listener.onItemChoose(Constant.OPERATION_ROTATION);
         }else if(curBtn==btnDel){
-            listener.onItemChoose(Constant.COMPONENT_DELETE);
+            listener.onItemChoose(Constant.OPERATION_DELETE);
         }else if(curBtn==btnPlay){
             btnPlay.setEnabled(false);
             btnPause.setEnabled(true);

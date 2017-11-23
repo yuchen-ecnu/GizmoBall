@@ -11,7 +11,7 @@ public class CircleBody extends AbstractCustomBody {
     public CircleBody(Body body, float radious, Color color) {
         this.color = color;
         this.size = radious;
-        this.type = Constant.COMPONENT_CIRCLE;
+        body.setUserData(Constant.COMPONENT_CIRCLE);
     }
 
     @Override

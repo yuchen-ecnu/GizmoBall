@@ -21,7 +21,7 @@ public class SquareBody extends AbstractCustomBody{
         this.body = body;
         this.color = color;
         this.size = size;
-        this.type = Constant.COMPONENT_SQUARE;
+        body.setUserData(Constant.COMPONENT_SQUARE);
     }
 
     @Override

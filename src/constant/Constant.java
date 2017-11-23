@@ -48,8 +48,8 @@ public class Constant {
     public static final int COMPONENT_ABSORBER = 10;
 
     /**操作类型定义*/
-    public static final int COMPONENT_ROTATION = 11;
-    public static final int COMPONENT_DELETE = 12;
+    public static final int OPERATION_ROTATION = 11;
+    public static final int OPERATION_DELETE = 12;
 
     /**游戏操作定义*/
     public static final int OPERATION_PLAY = 0;

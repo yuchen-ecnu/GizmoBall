@@ -4,8 +4,13 @@ import constant.Constant;
 import entity.*;
 import entity.base.AbstractCustomBody;
 import listener.UiListener;
+import org.jbox2d.callbacks.ContactImpulse;
+import org.jbox2d.callbacks.ContactListener;
+import org.jbox2d.collision.Manifold;
 import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.World;
+import org.jbox2d.dynamics.contacts.Contact;
 import utils.Box2DUtil;
 
 import java.awt.*;
@@ -17,7 +22,7 @@ import java.util.List;
 * @author Jack Chen
 * @date 2017/11/21
 */
-public class GameController implements UiListener{
+public class GameController implements UiListener, ContactListener {
     private World world;
     private List<AbstractCustomBody> components;
     
@@ -25,6 +30,7 @@ public class GameController implements UiListener{
         components = new ArrayList<>();
         //创建 重力加速度为10 的世界
         world = new World(new Vec2(0.0f,10.0f));
+        world.setContactListener(this);
         //创建边界
         Box2DUtil.createBoarder(Constant.GRID_COUNT,Constant.GRID_COUNT,world);
     }
@@ -57,10 +63,13 @@ public class GameController implements UiListener{
         for (int i = 0; i < components.size(); i++) {
             AbstractCustomBody comp = components.get(i);
             float size = comp.getSize()*Constant.RATE;
-            float x1 = comp.getBody().getPosition().x*Constant.RATE-size;
-            float y1 = comp.getBody().getPosition().y*Constant.RATE-size;
-            if (x >= x1 && x < x1 + size*2 && y >= y1 && y < y1 + size*2){
-                return comp;
+            Body body = comp.getBody();
+            if(body!=null){
+                float x1 = comp.getBody().getPosition().x*Constant.RATE-size;
+                float y1 = comp.getBody().getPosition().y*Constant.RATE-size;
+                if (x >= x1 && x < x1 + size*2 && y >= y1 && y < y1 + size*2){
+                    return comp;
+                }
             }
         }
         return null;
@@ -110,6 +119,11 @@ public class GameController implements UiListener{
                     AbsorberBody absorberBody = Box2DUtil.createAbsorber(point.x,point.y,size,world,Constant.COLOR_SQUARE);
                     components.add(absorberBody);
                     break;
+                case Constant.OPERATION_ROTATION:
+                    getComponent(point.x, point.y).rotation();
+                    break;
+                case Constant.OPERATION_DELETE:
+                    break;
                 default:
                     break;
             }
@@ -119,10 +133,15 @@ public class GameController implements UiListener{
 
     @Override
     public World onOperationClicked(int type) {
-        if(type == Constant.OPERATION_PLAY){
-            Constant.DRAW_THREAD_FLAG = true;
-        }else if(type == Constant.OPERATION_PAUSE){
-            Constant.DRAW_THREAD_FLAG = false;
+        switch(type){
+            case Constant.OPERATION_PLAY:
+                Constant.DRAW_THREAD_FLAG = true;
+                break;
+            case Constant.OPERATION_PAUSE:
+                Constant.DRAW_THREAD_FLAG = false;
+                break;
+            default:
+                break;
         }
         return world;
     }
@@ -130,5 +149,34 @@ public class GameController implements UiListener{
     @Override
     public List<AbstractCustomBody> componentInfoProvider() {
         return components;
+    }
+
+    @Override
+    public void beginContact(Contact contact) {
+        //吸收器
+        Body bodyA = contact.getFixtureA().getBody();
+        Body bodyB = contact.getFixtureB().getBody();
+        if((int) bodyA.getUserData()==Constant.COMPONENT_ABSORBER
+                &&(int) bodyB.getUserData()==Constant.COMPONENT_BALL) {
+            world.destroyBody(bodyB);
+        }else if((int) bodyB.getUserData()==Constant.COMPONENT_ABSORBER
+                &&(int) bodyA.getUserData()==Constant.COMPONENT_BALL){
+            world.destroyBody(bodyA);
+        }
+    }
+
+    @Override
+    public void endContact(Contact contact) {
+
+    }
+
+    @Override
+    public void preSolve(Contact contact, Manifold manifold) {
+
+    }
+
+    @Override
+    public void postSolve(Contact contact, ContactImpulse contactImpulse) {
+
     }
 }

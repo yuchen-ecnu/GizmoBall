@@ -13,10 +13,10 @@ import java.awt.*;
 public class BaffleBody extends AbstractCustomBody {
 
     public BaffleBody(Body body, int type, float size,Color color) {
-        this.type = type;
         this.size = size;
         this.body = body;
         this.color = color;
+        body.setUserData(type);
     }
 
     @Override

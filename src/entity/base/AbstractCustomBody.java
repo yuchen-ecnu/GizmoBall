@@ -1,6 +1,7 @@
 package entity.base;
 
 import org.jbox2d.dynamics.Body;
+import utils.Box2DUtil;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,14 +18,8 @@ public abstract class AbstractCustomBody {
     protected Body body;
     /**刚体的颜色*/
     protected Color color;
-    /**物体类型*/
-    protected int type;
-    /**物体尺寸，可以是半径或者边长*/
+    /**物体尺寸，可以是半径或者边长一半*/
     protected float size;
-
-    public int getType() {
-        return type;
-    }
 
     public Body getBody() {
         return body;
@@ -36,6 +31,10 @@ public abstract class AbstractCustomBody {
 
     public float getSize() {
         return size;
+    }
+
+    public void rotation(){
+//        body.setType();
     }
 
     public abstract void drawSelf(Graphics g);

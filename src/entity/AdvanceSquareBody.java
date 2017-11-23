@@ -14,7 +14,7 @@ public class AdvanceSquareBody extends AbstractCustomBody {
         this.size = size;
         this.color = color;
         this.body = body;
-        this.type = Constant.COMPONENT_ADVANCED_SQUARE;
+        body.setUserData(Constant.COMPONENT_ADVANCED_SQUARE);
     }
 
     @Override

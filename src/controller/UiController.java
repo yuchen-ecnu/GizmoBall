@@ -42,10 +42,22 @@ public class UiController implements OperationListener{
     @Override
     public void onBorderClicked(Point point,int size){
         if(curType!=0){
-            int unitSize = Constant.BOARD_SIZE/Constant.GRID_COUNT;
-            point.x = point.x/unitSize;
-            point.y = point.y/unitSize;
-            mainFrame.repaintBoardPanel(uiListener.onItemAdd(point,curType,size));
+            switch (curType){
+                case Constant.OPERATION_ROTATION:
+                    uiListener.onOperationClicked(Constant.OPERATION_ROTATION);
+                    mainFrame.repaintBoardPanel(uiListener.componentInfoProvider());
+                    break;
+                case Constant.OPERATION_DELETE:
+                    uiListener.onOperationClicked(Constant.OPERATION_DELETE);
+                    mainFrame.repaintBoardPanel(uiListener.componentInfoProvider());
+                    break;
+                default:
+                    int unitSize = Constant.BOARD_SIZE/Constant.GRID_COUNT;
+                    point.x = point.x/unitSize;
+                    point.y = point.y/unitSize;
+                    mainFrame.repaintBoardPanel(uiListener.onItemAdd(point,curType,size));
+                    break;
+            }
         }
     }
 

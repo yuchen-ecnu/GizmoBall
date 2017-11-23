@@ -18,7 +18,7 @@ public class AbsorberBody extends AbstractCustomBody {
         this.size = radious;
         this.body = body;
         this.color = color;
-        this.type = Constant.COMPONENT_ABSORBER;
+        body.setUserData(Constant.COMPONENT_ABSORBER);
     }
 
     @Override
