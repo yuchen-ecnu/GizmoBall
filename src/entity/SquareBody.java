@@ -8,6 +8,7 @@ import utils.DrawUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
 
 
 /**
@@ -15,7 +16,7 @@ import java.awt.*;
  * @author Jack Chen
  * @date 2017/11/21
  */
-public class SquareBody extends AbstractCustomBody{
+public class SquareBody extends AbstractCustomBody {
 
     public SquareBody(Body body,float size, Color color) {
         this.body = body;

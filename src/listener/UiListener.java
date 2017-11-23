@@ -16,4 +16,5 @@ public interface UiListener {
     List<AbstractCustomBody> onItemAdd(Point point, int currentType, int size);
     World onOperationClicked(int type);
     List<AbstractCustomBody> componentInfoProvider();
+    void onMenuClicked(int type);
 }

@@ -65,4 +65,10 @@ public class Constant {
     public static final Color COLOR_STICK = new Color(243,202,126);
 
     public static final Image IMAGE_BALL = ImageUtils.getImageNotIcon("ball.png",BALL_SIZE,BALL_SIZE);
+
+    /**菜单栏操作类型定义**/
+    public static final int MENUBAR_FILE_NEW = 1;
+    public static final int MENUBAR_FILE_OPEN = 2;
+    public static final int MENUBAR_FILE_SAVE = 3;
+    public static final int MENUBAR_FILE_EXIT = 4;
 }

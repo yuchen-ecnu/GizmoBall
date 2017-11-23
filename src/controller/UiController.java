@@ -65,4 +65,10 @@ public class UiController implements OperationListener{
     public void onRepaintBoard() {
         mainFrame.repaintBoardPanel(uiListener.componentInfoProvider());
     }
+
+    @Override
+    public void onMenuBarClicked(int type) {
+        uiListener.onMenuClicked(type);
+        mainFrame.repaintBoardPanel(uiListener.componentInfoProvider());
+    }
 }

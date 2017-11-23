@@ -5,6 +5,7 @@ import utils.Box2DUtil;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * @description 抽象基类，封装JBOX物理引擎中的Body
@@ -13,7 +14,7 @@ import java.awt.*;
  * @author Jack Chen
  * @date 2017/11/21
  */
-public abstract class AbstractCustomBody {
+public abstract class AbstractCustomBody implements Serializable {
     /**JBox2D物理引擎中的刚体(Body)*/
     protected Body body;
     /**刚体的颜色*/

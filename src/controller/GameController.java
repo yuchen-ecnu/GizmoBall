@@ -14,6 +14,10 @@ import org.jbox2d.dynamics.contacts.Contact;
 import utils.Box2DUtil;
 
 import java.awt.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -149,6 +153,36 @@ public class GameController implements UiListener, ContactListener {
     @Override
     public List<AbstractCustomBody> componentInfoProvider() {
         return components;
+    }
+
+    @Override
+    public void onMenuClicked(int type){
+        if(type == Constant.MENUBAR_FILE_NEW){
+            this.components.clear();
+        }else if(type == Constant.MENUBAR_FILE_EXIT){
+            System.exit(0);
+        }else if(type == Constant.MENUBAR_FILE_SAVE){
+            for(int i = 0; i < components.size(); i++) {
+                writeObjectToFile(components.get(i));
+            }
+        }
+    }
+
+    public static void writeObjectToFile(AbstractCustomBody abstractCustomBody)
+    {
+        File file =new File("test.dat");
+        FileOutputStream out;
+        try {
+            out = new FileOutputStream(file);
+            ObjectOutputStream objOut=new ObjectOutputStream(out);
+            objOut.writeObject(abstractCustomBody);
+            objOut.flush();
+            objOut.close();
+            System.out.println("write object success!");
+        } catch (IOException e) {
+            System.out.println("write object failed");
+            e.printStackTrace();
+        }
     }
 
     @Override

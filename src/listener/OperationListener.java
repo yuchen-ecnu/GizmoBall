@@ -7,4 +7,5 @@ public interface OperationListener {
     void onOperationClicked(int type);
     void onBorderClicked(Point point, int size);
     void onRepaintBoard();
+    void onMenuBarClicked(int type);
 }
