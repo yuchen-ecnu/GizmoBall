@@ -275,7 +275,7 @@ public class Box2DUtil {
         bodyDef.position.set(x / Constant.RATE + r ,y / Constant.RATE + r);
         Body body=world.createBody(bodyDef);
         body.createFixture(fDef);
-        return new CircleBody(body,radius/Constant.RATE,color);
+        return new CircleBody(body,r,color);
     }
 
     /**
@@ -311,7 +311,7 @@ public class Box2DUtil {
         bodyDef.position.set(x/Constant.RATE + r,y/Constant.RATE + r);
         Body body=world.createBody(bodyDef);
         body.createFixture(fDef);
-        return new TriangleBody(body,size/Constant.RATE,color);
+        return new TriangleBody(body,r,color);
     }
 
 
@@ -377,10 +377,10 @@ public class Box2DUtil {
         //创建刚体
         BodyDef bodyDef=new BodyDef();
         bodyDef.type=isStatic? BodyType.STATIC:BodyType.DYNAMIC;
-        bodyDef.position.set(x+r,y+r);
+        bodyDef.position.set(x/Constant.RATE+r,y/Constant.RATE+r);
         Body body=world.createBody(bodyDef);
         body.createFixture(fDef);
-        return new TrapezoidBody(body,size/Constant.RATE,color);
+        return new TrapezoidBody(body,r,color);
     }
 
     /**

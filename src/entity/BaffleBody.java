@@ -27,7 +27,7 @@ public class BaffleBody extends AbstractCustomBody {
         float x = vec2.x - size;
         float y = vec2.y - size;
         int unitSize = Constant.BOARD_SIZE/Constant.GRID_COUNT;
-        if(type == Constant.COMPONENT_LEFT_BAFFLE)
+        if((int)body.getUserData() == Constant.COMPONENT_LEFT_BAFFLE)
             DrawUtils.drawLeftFlipper(x*Constant.RATE*unitSize,y*Constant.RATE*unitSize,g,size*Constant.RATE*unitSize*2);
         else
             DrawUtils.drawRightFlipper(x*Constant.RATE*unitSize,y*Constant.RATE*unitSize,g,size*Constant.RATE*unitSize*2);
