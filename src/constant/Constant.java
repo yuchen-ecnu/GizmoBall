@@ -9,8 +9,8 @@ import java.awt.*;
  */
 public class Constant {
 
-    /**比例尺*/
-    public static final float RATE = 1;
+    /**比例尺(网格 : 模拟)*/
+    public static final float RATE = 1.0f / 10.0f;
 
     /**迭代次数*/
     public static final int ITERA = 10;

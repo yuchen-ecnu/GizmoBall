@@ -188,7 +188,7 @@ public class Box2DUtil {
     /**
      * 创建圆形
      * @param x 物体横坐标
-     * @param y 物体中坐标
+     * @param y 物体纵坐标
      * @param radius 物体半径
      * @param isStatic 是否固定
      * @param world 所属虚拟世界
