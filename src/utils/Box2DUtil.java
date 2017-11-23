@@ -2,11 +2,13 @@ package utils;
 
 import constant.Constant;
 import entity.*;
+import entity.base.AbstractCustomBody;
 import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.*;
 
+import javax.swing.*;
 import java.awt.*;
 
 
@@ -16,6 +18,65 @@ import java.awt.*;
  * @date 2017/11/21
  */
 public class Box2DUtil {
+
+    public static Body rotationBody(AbstractCustomBody abstractCustomBody, World world){
+        if(abstractCustomBody==null||abstractCustomBody.getBody()==null){
+            return null;
+        }
+        Body body = abstractCustomBody.getBody();
+        int type = (int) body.getUserData();
+        float size = abstractCustomBody.getSize();
+        float x = (body.getPosition().x -size)*Constant.RATE;
+        float y = (body.getPosition().y -size)*Constant.RATE;
+        Body retBody = null;
+        switch (type){
+            case Constant.COMPONENT_CIRCLE:
+                CircleBody circleBody = Box2DUtil.createCircle(x,y,size,true,world,Constant.COLOR_SQUARE);
+                retBody = circleBody.getBody();
+                break;
+            case Constant.COMPONENT_TRIANGLE:
+                TriangleBody triangleBody = Box2DUtil.createTriangle(x,y,size,true,world,Constant.COLOR_SQUARE);
+                retBody = triangleBody.getBody();
+                break;
+            case Constant.COMPONENT_SQUARE:
+                SquareBody squareBody = Box2DUtil.createSquare(x,y,size,world,Constant.COLOR_SQUARE);
+                retBody = squareBody.getBody();
+                break;
+            case Constant.COMPONENT_TRAPEZOID:
+                TrapezoidBody trapezoidBody = Box2DUtil.createTrapezoidBody(x,y,size,true,world,Constant.COLOR_SQUARE);
+                retBody = trapezoidBody.getBody();
+                break;
+            case Constant.COMPONENT_BALL:
+                Ball ball = Box2DUtil.createBall(x,y,world,Constant.COLOR_SQUARE);
+                retBody = ball.getBody();
+                break;
+            case Constant.COMPONENT_ADVANCED_SQUARE:
+                AdvanceSquareBody advanceSquareBody = Box2DUtil.createAdvanceSquareBody(x,y,size,world,Constant.COLOR_SQUARE);
+                retBody = advanceSquareBody.getBody();
+                break;
+            case Constant.COMPONENT_ELASTIC_PLATE:
+                ElasticPlateBody elasticPlateBody = Box2DUtil.createElasticPlateBody(x,y,size,world,Constant.COLOR_SQUARE);
+                retBody = elasticPlateBody.getBody();
+                break;
+            case Constant.COMPONENT_LEFT_BAFFLE:
+                BaffleBody leftBaffleBody = Box2DUtil.createBaffleBody(x,y,size,Constant.COMPONENT_LEFT_BAFFLE,world,Constant.COLOR_SQUARE);
+                retBody = leftBaffleBody.getBody();
+                break;
+            case Constant.COMPONENT_RIGHT_BAFFLE:
+                BaffleBody rightBaffleBody = Box2DUtil.createBaffleBody(x,y,size,Constant.COMPONENT_RIGHT_BAFFLE,world,Constant.COLOR_SQUARE);
+                retBody = rightBaffleBody.getBody();
+                break;
+            case Constant.COMPONENT_ABSORBER:
+                AbsorberBody absorberBody = Box2DUtil.createAbsorber(x,y,size,world,Constant.COLOR_SQUARE);
+                retBody = absorberBody.getBody();
+                break;
+            default:
+                break;
+        }
+        world.destroyBody(body);
+        return retBody;
+    }
+
 
     /**
      * 创建正方形

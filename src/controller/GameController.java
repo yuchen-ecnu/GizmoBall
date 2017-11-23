@@ -124,9 +124,10 @@ public class GameController implements UiListener, ContactListener {
                     components.add(absorberBody);
                     break;
                 case Constant.OPERATION_ROTATION:
-                    getComponent(point.x, point.y).rotation();
+                    getComponent(point.x, point.y).rotation(world);
                     break;
                 case Constant.OPERATION_DELETE:
+                    getComponent(point.x, point.y).destroy(world);
                     break;
                 default:
                     break;

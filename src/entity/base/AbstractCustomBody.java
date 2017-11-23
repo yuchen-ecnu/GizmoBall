@@ -1,6 +1,7 @@
 package entity.base;
 
 import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.World;
 import utils.Box2DUtil;
 
 import javax.swing.*;
@@ -34,9 +35,14 @@ public abstract class AbstractCustomBody implements Serializable {
         return size;
     }
 
-    public void rotation(){
-//        body.setType();
+    public void rotation(World world){
+        this.body = Box2DUtil.rotationBody(this,world);
+    }
+
+    public void destroy(World world){
+        world.destroyBody(body);
     }
 
     public abstract void drawSelf(Graphics g);
+
 }
