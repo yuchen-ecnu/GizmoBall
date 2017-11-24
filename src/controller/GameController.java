@@ -71,6 +71,7 @@ public class GameController implements UiListener, ContactListener {
             float size = comp.getSize()*Constant.RATE;
             Body body = comp.getBody();
             if(body!=null){
+                if((int)body.getUserData()==Constant.COMPONENT_BALL)continue;
                 float x1 = comp.getBody().getPosition().x*Constant.RATE-size;
                 float y1 = comp.getBody().getPosition().y*Constant.RATE-size;
                 if (x >= x1 && x < x1 + size*2 && y >= y1 && y < y1 + size*2){
@@ -87,10 +88,10 @@ public class GameController implements UiListener, ContactListener {
         if (body != null) {
             switch (currentType) {
                 case Constant.OPERATION_ROTATION:
-                    getComponent(point.x, point.y).rotation(world);
+                    body.rotation(world);
                     break;
                 case Constant.OPERATION_DELETE:
-                    getComponent(point.x, point.y).destroy(world);
+                    body.destroy(world);
                     components.remove(body);
                     break;
                 default:
