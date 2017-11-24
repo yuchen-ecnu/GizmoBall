@@ -25,25 +25,25 @@ public class Box2DUtil {
         }
         Body body = abstractCustomBody.getBody();
         int type = (int) body.getUserData();
-        float size = abstractCustomBody.getSize();
-        float x = (body.getPosition().x -size)*Constant.RATE;
-        float y = (body.getPosition().y -size)*Constant.RATE;
+        float size = abstractCustomBody.getSize() * Constant.RATE;
+        float x = body.getPosition().x * Constant.RATE - size;
+        float y = body.getPosition().y * Constant.RATE - size;
         Body retBody = null;
         switch (type){
             case Constant.COMPONENT_CIRCLE:
-                CircleBody circleBody = Box2DUtil.createCircle(x,y,size,true,world,Constant.COLOR_SQUARE);
+                CircleBody circleBody = Box2DUtil.createCircle(x,y,size*2,true,world,Constant.COLOR_SQUARE);
                 retBody = circleBody.getBody();
                 break;
             case Constant.COMPONENT_TRIANGLE:
-                TriangleBody triangleBody = Box2DUtil.createTriangle(x,y,size,true,world,Constant.COLOR_SQUARE);
+                TriangleBody triangleBody = Box2DUtil.createTriangle(x,y,size*2,true,world,Constant.COLOR_SQUARE);
                 retBody = triangleBody.getBody();
                 break;
             case Constant.COMPONENT_SQUARE:
-                SquareBody squareBody = Box2DUtil.createSquare(x,y,size,world,Constant.COLOR_SQUARE);
+                SquareBody squareBody = Box2DUtil.createSquare(x,y,size*2,world,Constant.COLOR_SQUARE);
                 retBody = squareBody.getBody();
                 break;
             case Constant.COMPONENT_TRAPEZOID:
-                TrapezoidBody trapezoidBody = Box2DUtil.createTrapezoidBody(x,y,size,true,world,Constant.COLOR_SQUARE);
+                TrapezoidBody trapezoidBody = Box2DUtil.createTrapezoidBody(x,y,size*2,true,world,Constant.COLOR_SQUARE);
                 retBody = trapezoidBody.getBody();
                 break;
             case Constant.COMPONENT_BALL:
@@ -51,23 +51,23 @@ public class Box2DUtil {
                 retBody = ball.getBody();
                 break;
             case Constant.COMPONENT_ADVANCED_SQUARE:
-                AdvanceSquareBody advanceSquareBody = Box2DUtil.createAdvanceSquareBody(x,y,size,world,Constant.COLOR_SQUARE);
+                AdvanceSquareBody advanceSquareBody = Box2DUtil.createAdvanceSquareBody(x,y,size*2,world,Constant.COLOR_SQUARE);
                 retBody = advanceSquareBody.getBody();
                 break;
             case Constant.COMPONENT_ELASTIC_PLATE:
-                ElasticPlateBody elasticPlateBody = Box2DUtil.createElasticPlateBody(x,y,size,world,Constant.COLOR_SQUARE);
+                ElasticPlateBody elasticPlateBody = Box2DUtil.createElasticPlateBody(x,y,size*2,world,Constant.COLOR_SQUARE);
                 retBody = elasticPlateBody.getBody();
                 break;
             case Constant.COMPONENT_LEFT_BAFFLE:
-                BaffleBody leftBaffleBody = Box2DUtil.createBaffleBody(x,y,size,Constant.COMPONENT_LEFT_BAFFLE,world,Constant.COLOR_SQUARE);
+                BaffleBody leftBaffleBody = Box2DUtil.createBaffleBody(x,y,size*2,Constant.COMPONENT_LEFT_BAFFLE,world,Constant.COLOR_SQUARE);
                 retBody = leftBaffleBody.getBody();
                 break;
             case Constant.COMPONENT_RIGHT_BAFFLE:
-                BaffleBody rightBaffleBody = Box2DUtil.createBaffleBody(x,y,size,Constant.COMPONENT_RIGHT_BAFFLE,world,Constant.COLOR_SQUARE);
+                BaffleBody rightBaffleBody = Box2DUtil.createBaffleBody(x,y,size*2,Constant.COMPONENT_RIGHT_BAFFLE,world,Constant.COLOR_SQUARE);
                 retBody = rightBaffleBody.getBody();
                 break;
             case Constant.COMPONENT_ABSORBER:
-                AbsorberBody absorberBody = Box2DUtil.createAbsorber(x,y,size,world,Constant.COLOR_SQUARE);
+                AbsorberBody absorberBody = Box2DUtil.createAbsorber(x,y,size*2,world,Constant.COLOR_SQUARE);
                 retBody = absorberBody.getBody();
                 break;
             default:
@@ -140,7 +140,7 @@ public class Box2DUtil {
 
         Body body=world.createBody(bodyDef);
         body.createFixture(fDef);
-        return new AdvanceSquareBody(body,size/Constant.RATE,color);
+        return new AdvanceSquareBody(body,r,color);
     }
 
     /**
@@ -173,7 +173,7 @@ public class Box2DUtil {
 
         Body body=world.createBody(bodyDef);
         body.createFixture(fDef);
-        return new ElasticPlateBody(body,length/Constant.RATE,color);
+        return new ElasticPlateBody(body,r,color);
     }
 
     /**
@@ -190,7 +190,7 @@ public class Box2DUtil {
         PolygonShape polygon =new PolygonShape();
         float r = length / 2.0f / Constant.RATE;
         //宽高
-        polygon.setAsBox(r/10.0f, r);
+        polygon.setAsBox(r/6.0f, r);
         //配置物体属性参数
         FixtureDef fDef=new FixtureDef();
         fDef.density=0;
@@ -203,11 +203,15 @@ public class Box2DUtil {
         //创建刚体
         BodyDef bodyDef=new BodyDef();
         bodyDef.type=BodyType.STATIC;
-        bodyDef.position.set(x+r,y+r);
+        if(direction == Constant.COMPONENT_LEFT_BAFFLE){
+            bodyDef.position.set(x/Constant.RATE,y/Constant.RATE + r);
+        }else{
+            bodyDef.position.set(x/Constant.RATE + 2*r,y/Constant.RATE + r);
+        }
 
         Body body=world.createBody(bodyDef);
         body.createFixture(fDef);
-        return new BaffleBody(body,direction,length/Constant.RATE,color);
+        return new BaffleBody(body,direction,r,color);
     }
 
     /**
@@ -239,7 +243,7 @@ public class Box2DUtil {
 
         Body body=world.createBody(bodyDef);
         body.createFixture(fDef);
-        return new AbsorberBody(body,size/Constant.RATE,color);
+        return new AbsorberBody(body,r,color);
     }
 
     /**

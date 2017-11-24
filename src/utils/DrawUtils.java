@@ -47,7 +47,6 @@ public class DrawUtils {
         g.setColor(Color.orange);
         g.fillRect((int) x,(int) y,(int)(size/6),(int) size);
         g.setColor(Color.white);
-        //g.drawRect((int) x,(int) y,(int)(size/6),(int) size);
         g.fillOval((int) x,(int) y,(int)(size/6),(int) (size/6));
     }
 
@@ -55,7 +54,6 @@ public class DrawUtils {
         g.setColor(Color.orange);
         g.fillRect((int) (x + size*5/6),(int) y,(int)(size/6),(int) size);
         g.setColor(Color.white);
-        //g.drawRect((int) x,(int) y,(int)(size/6),(int) size);
         g.fillOval((int) (x + size*5/6),(int) y,(int)(size/6),(int) (size/6));
     }
 

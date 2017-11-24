@@ -24,12 +24,14 @@ public class BaffleBody extends AbstractCustomBody {
     @Override
     public void drawSelf(Graphics g) {
         Vec2 vec2 = body.getPosition();
-        float x = vec2.x - size;
+        float x = vec2.x;
         float y = vec2.y - size;
         int unitSize = Constant.BOARD_SIZE/Constant.GRID_COUNT;
-        if((int)body.getUserData() == Constant.COMPONENT_LEFT_BAFFLE)
-            DrawUtils.drawLeftFlipper(x*Constant.RATE*unitSize,y*Constant.RATE*unitSize,g,size*Constant.RATE*unitSize*2);
-        else
-            DrawUtils.drawRightFlipper(x*Constant.RATE*unitSize,y*Constant.RATE*unitSize,g,size*Constant.RATE*unitSize*2);
+        if((int)body.getUserData() == Constant.COMPONENT_LEFT_BAFFLE) {
+            DrawUtils.drawLeftFlipper(x * Constant.RATE * unitSize, y * Constant.RATE * unitSize, g, size * Constant.RATE * unitSize * 2);
+        } else {
+            x = x- 2*size;
+            DrawUtils.drawRightFlipper(x * Constant.RATE * unitSize, y * Constant.RATE * unitSize, g, size * Constant.RATE * unitSize * 2);
+        }
     }
 }

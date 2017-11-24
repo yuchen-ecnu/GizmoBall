@@ -47,15 +47,16 @@ public class GameController implements UiListener, ContactListener {
      * @param size size大小
      * @return
      */
-    public boolean isEmpty(int x, int y, int size) {
+    public AbstractCustomBody isEmpty(int x, int y, int size) {
         for (int i = x; i < x + size; i++) {
             for (int j = y; j < y + size; j++) {
-                if (getComponent(i, j) != null) {
-                    return false;
+                AbstractCustomBody body = getComponent(i, j);
+                if (body != null) {
+                    return body;
                 }
             }
         }
-        return true;
+        return null;
     }
 
     /**
@@ -82,7 +83,19 @@ public class GameController implements UiListener, ContactListener {
 
     @Override
     public List<AbstractCustomBody> onItemAdd(Point point, int currentType,int size) {
-        if(isEmpty(point.x, point.y,size)) {
+        AbstractCustomBody body = isEmpty(point.x, point.y,size);
+        if (body != null) {
+            switch (currentType) {
+                case Constant.OPERATION_ROTATION:
+                    getComponent(point.x, point.y).rotation(world);
+                    break;
+                case Constant.OPERATION_DELETE:
+                    getComponent(point.x, point.y).destroy(world);
+                    break;
+                default:
+                    break;
+            }
+        }else if(body==null) {
             switch (currentType) {
                 case Constant.COMPONENT_CIRCLE:
                     CircleBody circleBody = Box2DUtil.createCircle(point.x,point.y,size,true,world,Constant.COLOR_SQUARE);
@@ -123,12 +136,6 @@ public class GameController implements UiListener, ContactListener {
                 case Constant.COMPONENT_ABSORBER:
                     AbsorberBody absorberBody = Box2DUtil.createAbsorber(point.x,point.y,size,world,Constant.COLOR_SQUARE);
                     components.add(absorberBody);
-                    break;
-                case Constant.OPERATION_ROTATION:
-                    getComponent(point.x, point.y).rotation(world);
-                    break;
-                case Constant.OPERATION_DELETE:
-                    getComponent(point.x, point.y).destroy(world);
                     break;
                 default:
                     break;
