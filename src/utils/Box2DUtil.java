@@ -368,7 +368,7 @@ public class Box2DUtil {
         PolygonShape trapezoidBody = new PolygonShape();
 
         float r = size / 2.0f / Constant.RATE;
-        trapezoidBody.set(new Vec2[]{new Vec2(-r, -r), new Vec2(-r/2.0f, r), new Vec2(r/2.0f, r), new Vec2(r, -r)},4);
+        trapezoidBody.set(new Vec2[]{new Vec2(-r, r), new Vec2(-r/2.0f, -r), new Vec2(r/2.0f, -r), new Vec2(r, r)},4);
         //配置物体属性参数
         FixtureDef fDef=new FixtureDef();
         if(isStatic) {

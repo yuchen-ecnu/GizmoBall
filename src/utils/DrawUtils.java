@@ -114,10 +114,10 @@ public class DrawUtils {
             px2 = (int) x;
             px3 = (int) (x + size);
             px4 = (int) (x + size);
-            py1 = (int) (y + size/4);
-            py2 = (int) (y + size*3/4);
-            py3 = (int) (y + size);
-            py4 = (int) y;
+            py1 = (int) y;
+            py2 = (int) (y + size);
+            py3 = (int) (y + size*3/4);
+            py4 = (int) (y + size/4);
         }else if(trueAngle < (Math.PI*3/2)){
             px1 = (int) x ;
             px2 = (int) (x + size/4);
@@ -132,10 +132,10 @@ public class DrawUtils {
             px2 = (int) x;
             px3 = (int) (x + size);
             px4 = (int) (x + size);
-            py1 = (int) y;
-            py2 = (int) (y + size);
-            py3 = (int) (y + size*3/4);
-            py4 = (int) (y + size/4);
+            py1 = (int) (y + size/4);
+            py2 = (int) (y + size*3/4);
+            py3 = (int) (y + size);
+            py4 = (int) y;
         }
         int px[] = {px1,px2,px3,px4,px1};
         int py[] = {py1,py2,py3,py4,py1};
