@@ -103,7 +103,7 @@ public class GameController implements UiListener, ContactListener {
                     components.add(circleBody);
                     break;
                 case Constant.COMPONENT_TRIANGLE:
-                    TriangleBody triangleBody = Box2DUtil.createTriangle(point.x,point.y,size,true,world,Constant.COLOR_SQUARE);
+                    TriangleBody triangleBody = Box2DUtil.createTriangle(point.x,point.y,size,0,true,world,Constant.COLOR_SQUARE);
                     components.add(triangleBody);
                     break;
                 case Constant.COMPONENT_SQUARE:
@@ -111,7 +111,7 @@ public class GameController implements UiListener, ContactListener {
                     components.add(squareBody);
                     break;
                 case Constant.COMPONENT_TRAPEZOID:
-                    TrapezoidBody trapezoidBody = Box2DUtil.createTrapezoidBody(point.x,point.y,size,true,world,Constant.COLOR_SQUARE);
+                    TrapezoidBody trapezoidBody = Box2DUtil.createTrapezoidBody(point.x,point.y,size,0,true,world,Constant.COLOR_SQUARE);
                     components.add(trapezoidBody);
                     break;
                 case Constant.COMPONENT_BALL:
@@ -123,7 +123,7 @@ public class GameController implements UiListener, ContactListener {
                     components.add(advanceSquareBody);
                     break;
                 case Constant.COMPONENT_ELASTIC_PLATE:
-                    ElasticPlateBody elasticPlateBody = Box2DUtil.createElasticPlateBody(point.x,point.y,size,world,Constant.COLOR_SQUARE);
+                    ElasticPlateBody elasticPlateBody = Box2DUtil.createElasticPlateBody(point.x,point.y,size,0,world,Constant.COLOR_SQUARE);
                     components.add(elasticPlateBody);
                     break;
                 case Constant.COMPONENT_LEFT_BAFFLE:

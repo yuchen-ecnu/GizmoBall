@@ -4,6 +4,7 @@ import constant.Constant;
 import entity.base.AbstractCustomBody;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.World;
 import utils.DrawUtils;
 import java.awt.*;
 
@@ -24,4 +25,9 @@ public class CircleBody extends AbstractCustomBody {
         int unitSize = Constant.BOARD_SIZE/Constant.GRID_COUNT;
         DrawUtils.drawCircle(x*Constant.RATE*unitSize,y*Constant.RATE*unitSize,g,size*Constant.RATE*unitSize);
     }
+
+//    @Override
+//    public void rotation(World world) {
+//        //Do nothing
+//    }
 }

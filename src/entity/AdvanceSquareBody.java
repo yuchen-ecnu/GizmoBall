@@ -3,6 +3,7 @@ package entity;
 import constant.Constant;
 import entity.base.AbstractCustomBody;
 import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.World;
 import utils.DrawUtils;
 import utils.ImageUtils;
 import org.jbox2d.dynamics.Body;
@@ -27,4 +28,9 @@ public class AdvanceSquareBody extends AbstractCustomBody {
         int unitSize = Constant.BOARD_SIZE/Constant.GRID_COUNT;
         DrawUtils.drawStickSquare(x*Constant.RATE*unitSize,y*Constant.RATE*unitSize,g,size*Constant.RATE*unitSize*2);
     }
+
+//    @Override
+//    public void rotation(World world) {
+//        //Do nothing
+//    }
 }

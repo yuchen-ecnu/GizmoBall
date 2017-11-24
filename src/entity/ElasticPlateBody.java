@@ -4,6 +4,7 @@ import constant.Constant;
 import entity.base.AbstractCustomBody;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.World;
 import utils.DrawUtils;
 
 import javax.swing.*;
@@ -30,4 +31,10 @@ public class ElasticPlateBody extends AbstractCustomBody {
         double angle = body.getAngle();
         DrawUtils.drawStick(x*Constant.RATE*unitSize,y*Constant.RATE*unitSize,g,size*Constant.RATE*unitSize*2,angle);
     }
+//
+//    @Override
+//    public void rotation(World world) {
+//        double angle = body.getAngle() + Math.PI/2;
+//        System.out.println(angle);
+//    }
 }

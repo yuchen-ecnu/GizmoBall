@@ -70,11 +70,11 @@ public class DrawUtils {
             py3 = (int) y;
         }else if(trueAngle < (Math.PI)){
             px1 = (int) x;
-            px2 = (int) x;
+            px2 = (int) (x + size);
             px3 = (int) (x + size);
             py1 = (int) y;
             py2 = (int) (y + size);
-            py3 = (int) (y + size);
+            py3 = (int) y;
         }else if(trueAngle < (Math.PI*3/2)){
             px1 = (int) x;
             px2 = (int) (x + size);
@@ -84,11 +84,11 @@ public class DrawUtils {
             py3 = (int) y;
         }else{
             px1 = (int) x;
-            px2 = (int) (x + size);
+            px2 = (int) x;
             px3 = (int) (x + size);
             py1 = (int) y;
             py2 = (int) (y + size);
-            py3 = (int) y;
+            py3 = (int) (y + size);
         }
         int px[] = {px1,px2,px3,px1};
         int py[] = {py1,py2,py3,py1};

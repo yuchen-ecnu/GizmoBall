@@ -4,6 +4,7 @@ import constant.Constant;
 import entity.base.AbstractCustomBody;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.World;
 import utils.DrawUtils;
 
 import javax.swing.*;
@@ -30,4 +31,9 @@ public class TriangleBody extends AbstractCustomBody {
         double angle = body.getAngle();
         DrawUtils.drawTriangle(x*Constant.RATE*unitSize,y*Constant.RATE*unitSize,g,size*Constant.RATE*unitSize*2,angle);
     }
+
+//    @Override
+//    public void rotation(World world) {
+//        //TODO:
+//    }
 }

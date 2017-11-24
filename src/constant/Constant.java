@@ -18,6 +18,7 @@ public class Constant {
     public static final float TIME_STEP = 1.0f / 30.0f;
     public static final int VELOCITY_ITERATION = 6;
     public static final int POSITION_ITERATION = 2;
+    public static final float BALL_UNIT_SIZE = 1.0f;
 
     /**绘制线程工作标志位*/
     public static boolean DRAW_THREAD_FLAG = false;

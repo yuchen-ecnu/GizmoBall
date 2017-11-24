@@ -14,6 +14,7 @@ import java.awt.*;
 
 /**
  * @description 刚体生成类（内部将按照比例尺转化）
+ *              坐标系为 右->x  | 下->y
  * @author Jack Chen
  * @date 2017/11/21
  */
@@ -25,6 +26,7 @@ public class Box2DUtil {
         }
         Body body = abstractCustomBody.getBody();
         int type = (int) body.getUserData();
+        float angle = (float) (body.getAngle() + Math.PI/2);
         float size = abstractCustomBody.getSize() * Constant.RATE;
         float x = body.getPosition().x * Constant.RATE - size;
         float y = body.getPosition().y * Constant.RATE - size;
@@ -35,7 +37,7 @@ public class Box2DUtil {
                 retBody = circleBody.getBody();
                 break;
             case Constant.COMPONENT_TRIANGLE:
-                TriangleBody triangleBody = Box2DUtil.createTriangle(x,y,size*2,true,world,Constant.COLOR_SQUARE);
+                TriangleBody triangleBody = Box2DUtil.createTriangle(x,y,size*2,angle,true,world,Constant.COLOR_SQUARE);
                 retBody = triangleBody.getBody();
                 break;
             case Constant.COMPONENT_SQUARE:
@@ -43,7 +45,7 @@ public class Box2DUtil {
                 retBody = squareBody.getBody();
                 break;
             case Constant.COMPONENT_TRAPEZOID:
-                TrapezoidBody trapezoidBody = Box2DUtil.createTrapezoidBody(x,y,size*2,true,world,Constant.COLOR_SQUARE);
+                TrapezoidBody trapezoidBody = Box2DUtil.createTrapezoidBody(x,y,size*2,angle,true,world,Constant.COLOR_SQUARE);
                 retBody = trapezoidBody.getBody();
                 break;
             case Constant.COMPONENT_BALL:
@@ -55,7 +57,7 @@ public class Box2DUtil {
                 retBody = advanceSquareBody.getBody();
                 break;
             case Constant.COMPONENT_ELASTIC_PLATE:
-                ElasticPlateBody elasticPlateBody = Box2DUtil.createElasticPlateBody(x,y,size*2,world,Constant.COLOR_SQUARE);
+                ElasticPlateBody elasticPlateBody = Box2DUtil.createElasticPlateBody(x,y,size*2,angle,world,Constant.COLOR_SQUARE);
                 retBody = elasticPlateBody.getBody();
                 break;
             case Constant.COMPONENT_LEFT_BAFFLE:
@@ -151,7 +153,7 @@ public class Box2DUtil {
      * @param world 所属模拟世界
      * @param color 颜色
      */
-    public static ElasticPlateBody createElasticPlateBody(float x,float y, float length, World world, Color color) {
+    public static ElasticPlateBody createElasticPlateBody(float x,float y, float length,float angle, World world, Color color) {
         //自定义形状
         PolygonShape polygon =new PolygonShape();
         float r = length / 2.0f / Constant.RATE;
@@ -169,6 +171,7 @@ public class Box2DUtil {
         //创建刚体
         BodyDef bodyDef=new BodyDef();
         bodyDef.type=BodyType.STATIC;
+        bodyDef.angle = angle;
         bodyDef.position.set(x/Constant.RATE + r,y/Constant.RATE + r);
 
         Body body=world.createBody(bodyDef);
@@ -292,7 +295,7 @@ public class Box2DUtil {
      * @param color 物体颜色
      * @return
      */
-    public static TriangleBody createTriangle(float x, float y, float size, boolean isStatic, World world, Color color){
+    public static TriangleBody createTriangle(float x, float y, float size,float angle, boolean isStatic, World world, Color color){
         PolygonShape triangleShape = new PolygonShape();
         float r = size / 2.0f / Constant.RATE;
         triangleShape.set(new Vec2[]{new Vec2(-r, -r), new Vec2(-r, r), new Vec2(r, -r)},3);
@@ -312,6 +315,7 @@ public class Box2DUtil {
         //创建刚体
         BodyDef bodyDef=new BodyDef();
         bodyDef.type=isStatic? BodyType.STATIC:BodyType.DYNAMIC;
+        bodyDef.angle = angle;
         bodyDef.position.set(x/Constant.RATE + r,y/Constant.RATE + r);
         Body body=world.createBody(bodyDef);
         body.createFixture(fDef);
@@ -330,7 +334,7 @@ public class Box2DUtil {
     public static Ball createBall(float x, float y, World world, Color color){
         CircleShape ballShape = new CircleShape();
 
-        float r = 1 / 2.0f / Constant.RATE;
+        float r = Constant.BALL_UNIT_SIZE / 2.0f / Constant.RATE;
         ballShape.setRadius(r);
         //配置物体属性参数
         FixtureDef fDef=new FixtureDef();
@@ -360,7 +364,7 @@ public class Box2DUtil {
      * @param color 物体颜色
      * @return
      */
-    public static TrapezoidBody createTrapezoidBody(float x, float y, float size, boolean isStatic, World world, Color color){
+    public static TrapezoidBody createTrapezoidBody(float x, float y, float size,float angle, boolean isStatic, World world, Color color){
         PolygonShape trapezoidBody = new PolygonShape();
 
         float r = size / 2.0f / Constant.RATE;
@@ -382,6 +386,7 @@ public class Box2DUtil {
         BodyDef bodyDef=new BodyDef();
         bodyDef.type=isStatic? BodyType.STATIC:BodyType.DYNAMIC;
         bodyDef.position.set(x/Constant.RATE+r,y/Constant.RATE+r);
+        bodyDef.angle = angle;
         Body body=world.createBody(bodyDef);
         body.createFixture(fDef);
         return new TrapezoidBody(body,r,color);
