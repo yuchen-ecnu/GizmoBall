@@ -22,6 +22,6 @@ public class CircleBody extends AbstractCustomBody {
         float x = vec2.x - size;
         float y = vec2.y - size;
         int unitSize = Constant.BOARD_SIZE/Constant.GRID_COUNT;
-        DrawUtils.drawCircle(x*Constant.RATE*unitSize,y*Constant.RATE*unitSize,g,size*Constant.RATE*unitSize*2);
+        DrawUtils.drawCircle(x*Constant.RATE*unitSize,y*Constant.RATE*unitSize,g,size*Constant.RATE*unitSize);
     }
 }

@@ -176,6 +176,10 @@ public class GameController implements UiListener, ContactListener {
         //吸收器
         Body bodyA = contact.getFixtureA().getBody();
         Body bodyB = contact.getFixtureB().getBody();
+        if(bodyA==null||bodyA.getUserData()==null
+                ||bodyB==null||bodyB.getUserData()==null) {
+            return;
+        }
         if((int) bodyA.getUserData()==Constant.COMPONENT_ABSORBER
                 &&(int) bodyB.getUserData()==Constant.COMPONENT_BALL) {
             world.destroyBody(bodyB);
