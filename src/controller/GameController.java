@@ -91,6 +91,7 @@ public class GameController implements UiListener, ContactListener {
                     break;
                 case Constant.OPERATION_DELETE:
                     getComponent(point.x, point.y).destroy(world);
+                    components.remove(body);
                     break;
                 default:
                     break;
