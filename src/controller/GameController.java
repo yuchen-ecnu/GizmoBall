@@ -60,6 +60,29 @@ public class GameController implements UiListener, ContactListener {
     }
 
     /**
+     * 清除component和屏幕图案
+     */
+    private void clearScreen(){
+        for (AbstractCustomBody ab : components) {
+            ab.destroy(world);
+        }
+        this.components.clear();
+    }
+
+    /**
+     * 根据文件对象初始化screen及数据
+     * @param comps
+     */
+    private void initScreen(List<SerializableObject> comps){
+        clearScreen();
+        for (SerializableObject obj : comps) {
+            Point point = new Point((int) obj.getY(), (int) obj.getX());
+            int type = obj.getType();
+            generateComponent(point,type, (int) obj.getSize());
+        }
+    }
+
+    /**
      * 根据坐标获取组件（第一个被添加的）
      * @param x 坐标x
      * @param y 坐标y
@@ -89,6 +112,7 @@ public class GameController implements UiListener, ContactListener {
             switch (currentType) {
                 case Constant.OPERATION_ROTATION:
                     body.rotation(world);
+                    components.set(components.indexOf(body),body);
                     break;
                 case Constant.OPERATION_DELETE:
                     body.destroy(world);
@@ -97,53 +121,63 @@ public class GameController implements UiListener, ContactListener {
                 default:
                     break;
             }
-        }else if(body==null) {
-            switch (currentType) {
-                case Constant.COMPONENT_CIRCLE:
-                    CircleBody circleBody = Box2DUtil.createCircle(point.x,point.y,size,true,world,Constant.COLOR_SQUARE);
-                    components.add(circleBody);
-                    break;
-                case Constant.COMPONENT_TRIANGLE:
-                    TriangleBody triangleBody = Box2DUtil.createTriangle(point.x,point.y,size,0,true,world,Constant.COLOR_SQUARE);
-                    components.add(triangleBody);
-                    break;
-                case Constant.COMPONENT_SQUARE:
-                    SquareBody squareBody = Box2DUtil.createSquare(point.x,point.y,size,world,Constant.COLOR_SQUARE);
-                    components.add(squareBody);
-                    break;
-                case Constant.COMPONENT_TRAPEZOID:
-                    TrapezoidBody trapezoidBody = Box2DUtil.createTrapezoidBody(point.x,point.y,size,0,true,world,Constant.COLOR_SQUARE);
-                    components.add(trapezoidBody);
-                    break;
-                case Constant.COMPONENT_BALL:
-                    Ball ball = Box2DUtil.createBall(point.x,point.y,world,Constant.COLOR_SQUARE);
-                    components.add(ball);
-                    break;
-                case Constant.COMPONENT_ADVANCED_SQUARE:
-                    AdvanceSquareBody advanceSquareBody = Box2DUtil.createAdvanceSquareBody(point.x,point.y,size,world,Constant.COLOR_SQUARE);
-                    components.add(advanceSquareBody);
-                    break;
-                case Constant.COMPONENT_ELASTIC_PLATE:
-                    ElasticPlateBody elasticPlateBody = Box2DUtil.createElasticPlateBody(point.x,point.y,size,0,world,Constant.COLOR_SQUARE);
-                    components.add(elasticPlateBody);
-                    break;
-                case Constant.COMPONENT_LEFT_BAFFLE:
-                    BaffleBody leftBaffleBody = Box2DUtil.createBaffleBody(point.x,point.y,size,Constant.COMPONENT_LEFT_BAFFLE,world,Constant.COLOR_SQUARE);
-                    components.add(leftBaffleBody);
-                    break;
-                case Constant.COMPONENT_RIGHT_BAFFLE:
-                    BaffleBody rightBaffleBody = Box2DUtil.createBaffleBody(point.x,point.y,size,Constant.COMPONENT_RIGHT_BAFFLE,world,Constant.COLOR_SQUARE);
-                    components.add(rightBaffleBody);
-                    break;
-                case Constant.COMPONENT_ABSORBER:
-                    AbsorberBody absorberBody = Box2DUtil.createAbsorber(point.x,point.y,size,world,Constant.COLOR_SQUARE);
-                    components.add(absorberBody);
-                    break;
-                default:
-                    break;
-            }
+        }else {
+            generateComponent(point, currentType, size);
         }
         return components;
+    }
+
+    /**
+     * 根据控件类型生成控件（图案+模拟环境）
+     * @param point 点坐标（左上角）
+     * @param currentType 类型
+     * @param size 大小（以单元格为单位）
+     */
+    private void generateComponent(Point point, int currentType, int size) {
+        switch (currentType) {
+            case Constant.COMPONENT_CIRCLE:
+                CircleBody circleBody = Box2DUtil.createCircle(point.x,point.y,size,true,world,Constant.COLOR_SQUARE);
+                components.add(circleBody);
+                break;
+            case Constant.COMPONENT_TRIANGLE:
+                TriangleBody triangleBody = Box2DUtil.createTriangle(point.x,point.y,size,0,true,world,Constant.COLOR_SQUARE);
+                components.add(triangleBody);
+                break;
+            case Constant.COMPONENT_SQUARE:
+                SquareBody squareBody = Box2DUtil.createSquare(point.x,point.y,size,world,Constant.COLOR_SQUARE);
+                components.add(squareBody);
+                break;
+            case Constant.COMPONENT_TRAPEZOID:
+                TrapezoidBody trapezoidBody = Box2DUtil.createTrapezoidBody(point.x,point.y,size,0,true,world,Constant.COLOR_SQUARE);
+                components.add(trapezoidBody);
+                break;
+            case Constant.COMPONENT_BALL:
+                Ball ball = Box2DUtil.createBall(point.x,point.y,world,Constant.COLOR_SQUARE);
+                components.add(ball);
+                break;
+            case Constant.COMPONENT_ADVANCED_SQUARE:
+                AdvanceSquareBody advanceSquareBody = Box2DUtil.createAdvanceSquareBody(point.x,point.y,size,world,Constant.COLOR_SQUARE);
+                components.add(advanceSquareBody);
+                break;
+            case Constant.COMPONENT_ELASTIC_PLATE:
+                ElasticPlateBody elasticPlateBody = Box2DUtil.createElasticPlateBody(point.x,point.y,size,0,world,Constant.COLOR_SQUARE);
+                components.add(elasticPlateBody);
+                break;
+            case Constant.COMPONENT_LEFT_BAFFLE:
+                BaffleBody leftBaffleBody = Box2DUtil.createBaffleBody(point.x,point.y,size,Constant.COMPONENT_LEFT_BAFFLE,world,Constant.COLOR_SQUARE);
+                components.add(leftBaffleBody);
+                break;
+            case Constant.COMPONENT_RIGHT_BAFFLE:
+                BaffleBody rightBaffleBody = Box2DUtil.createBaffleBody(point.x,point.y,size,Constant.COMPONENT_RIGHT_BAFFLE,world,Constant.COLOR_SQUARE);
+                components.add(rightBaffleBody);
+                break;
+            case Constant.COMPONENT_ABSORBER:
+                AbsorberBody absorberBody = Box2DUtil.createAbsorber(point.x,point.y,size,world,Constant.COLOR_SQUARE);
+                components.add(absorberBody);
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -169,13 +203,13 @@ public class GameController implements UiListener, ContactListener {
     @Override
     public void onMenuClicked(int type){
         if(type == Constant.MENUBAR_FILE_NEW){
-            this.components.clear();
+            clearScreen();
         }else if(type == Constant.MENUBAR_FILE_EXIT){
             System.exit(0);
         }else if(type == Constant.MENUBAR_FILE_SAVE){
             FileUtils.writeToFile(components);
         }else if(type == Constant.MENUBAR_FILE_OPEN){
-            FileUtils.readFromFile();
+            initScreen(FileUtils.readFromFile());
         }
     }
 
@@ -212,5 +246,4 @@ public class GameController implements UiListener, ContactListener {
     public void postSolve(Contact contact, ContactImpulse contactImpulse) {
 
     }
-
 }
