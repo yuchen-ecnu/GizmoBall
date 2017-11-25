@@ -4,6 +4,8 @@ import constant.Constant;
 import entity.SerializableObject;
 import entity.base.AbstractCustomBody;
 
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -15,16 +17,12 @@ import java.util.List;
  * @date 2017/11/21
  */
 public class FileUtils {
-    public static void main(String[] args) {
-        readFromFile();
-    }
     public static void writeToFile(List<AbstractCustomBody> components) {
         writeObjectToFile(converse(components));
     }
 
-    public static void readFromFile() {
-        List<AbstractCustomBody> components = (List<AbstractCustomBody>) readObjectFromFile();
-        System.out.println(components);
+    public static List<SerializableObject> readFromFile() {
+        return (List<SerializableObject>) readObjectFromFile();
     }
 
     private static List<SerializableObject> converse(List<AbstractCustomBody> abstractCustomBodyList){
@@ -34,7 +32,7 @@ public class FileUtils {
             int type = Integer.parseInt(abstractCustomBody.getBody().getUserData().toString());
             float x = (abstractCustomBody.getBody().getPosition().x - abstractCustomBody.getSize()) * Constant.RATE;
             float y = (abstractCustomBody.getBody().getPosition().y - abstractCustomBody.getSize()) * Constant.RATE;
-            float size = abstractCustomBody.getSize();
+            float size = abstractCustomBody.getSize() * Constant.RATE * 2;
             float direction = abstractCustomBody.getBody().getAngle();
             Color color = abstractCustomBody.getColor();
             serializableObject.setType(type);
@@ -50,24 +48,47 @@ public class FileUtils {
 
 
     private static void writeObjectToFile(Object object) {
-        File file =new File("test.gizmo");
-        FileOutputStream out;
-        try {
-            out = new FileOutputStream(file);
-            ObjectOutputStream objOut=new ObjectOutputStream(out);
-            objOut.writeObject(object);
-            objOut.flush();
-            objOut.close();
-            System.out.println("write object success!");
-        } catch (IOException e) {
-            System.out.println("write object failed");
-            e.printStackTrace();
+        //弹出文件选择框
+        JFileChooser chooser = new JFileChooser();
+
+        //后缀名过滤器
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "Gizmo布局文件(*.gizmo)", "gizmo");
+        chooser.setFileFilter(filter);
+
+        int option = chooser.showSaveDialog(null);
+        if(option==JFileChooser.APPROVE_OPTION){
+            File file = chooser.getSelectedFile();
+            String fname = chooser.getName(file);
+            FileOutputStream out;
+            if(!fname.contains(".gizmo")){
+                file=new File(chooser.getCurrentDirectory(),fname+".gizmo");
+            }
+            try {
+                out = new FileOutputStream(file);
+                ObjectOutputStream objOut=new ObjectOutputStream(out);
+                objOut.writeObject(object);
+                objOut.flush();
+                objOut.close();
+                System.out.println("write object success!");
+            } catch (IOException e) {
+                System.out.println("write object failed");
+                e.printStackTrace();
+            }
         }
+
     }
 
     private static Object readObjectFromFile() {
+        JFileChooser jfc=new JFileChooser();
+        //后缀名过滤器
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "Gizmo布局文件(*.gizmo)", "gizmo");
+        jfc.setFileFilter(filter);
+        jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        jfc.showDialog(new JLabel(), "选择");
+        File file=jfc.getSelectedFile();
         Object temp=null;
-        File file =new File("test.gizmo");
         FileInputStream in;
         try {
             in = new FileInputStream(file);
@@ -77,6 +98,7 @@ public class FileUtils {
             System.out.println("read object success!");
         } catch (IOException e) {
             System.out.println("read object failed");
+            JOptionPane.showMessageDialog(null,"文件读取失败，请检查文件格式！");
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
