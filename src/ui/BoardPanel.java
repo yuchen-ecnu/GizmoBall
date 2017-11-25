@@ -58,7 +58,6 @@ public class BoardPanel extends JPanel {
 		for (int i = 0; i < Constant.BOARD_SIZE; i += size) {
             g.drawLine(0, i, Constant.BOARD_SIZE, i);
         }
-        DrawUtils.drawStick(30,30,g,30,Math.PI/2);
 	}
 
 

@@ -15,10 +15,6 @@ import utils.Box2DUtil;
 import utils.FileUtils;
 
 import java.awt.*;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,7 +67,9 @@ public class GameController implements UiListener, ContactListener {
             float size = comp.getSize()*Constant.RATE;
             Body body = comp.getBody();
             if(body!=null){
-                if((int)body.getUserData()==Constant.COMPONENT_BALL)continue;
+                if((int)body.getUserData()==Constant.COMPONENT_BALL) {
+                    continue;
+                }
                 float x1 = comp.getBody().getPosition().x*Constant.RATE-size;
                 float y1 = comp.getBody().getPosition().y*Constant.RATE-size;
                 if (x >= x1 && x < x1 + size*2 && y >= y1 && y < y1 + size*2){
@@ -168,14 +166,21 @@ public class GameController implements UiListener, ContactListener {
 
     @Override
     public void onMenuClicked(int type){
-        if(type == Constant.MENUBAR_FILE_NEW){
-            this.components.clear();
-        }else if(type == Constant.MENUBAR_FILE_EXIT){
-            System.exit(0);
-        }else if(type == Constant.MENUBAR_FILE_SAVE){
-            FileUtils.writeToFile(components);
-        }else if(type == Constant.MENUBAR_FILE_OPEN){
-            FileUtils.readFromFile();
+        switch(type){
+            case Constant.MENUBAR_FILE_NEW:
+                this.components.clear();
+                break;
+            case Constant.MENUBAR_FILE_EXIT:
+                System.exit(0);
+                break;
+            case Constant.MENUBAR_FILE_SAVE:
+                FileUtils.writeToFile(components);
+                break;
+            case Constant.MENUBAR_FILE_OPEN:
+                FileUtils.readFromFile();
+                break;
+            default:
+                break;
         }
     }
 
