@@ -26,7 +26,7 @@ public class Box2DUtil {
             return null;
         }
         Body body = abstractCustomBody.getBody();
-        int type = (int) body.getUserData();
+        int type = ((BodyData) body.getUserData()).getType();
         float angle = (float) (body.getAngle() + Math.PI/2);
         float size = abstractCustomBody.getSize() * Constant.RATE;
         float x = body.getPosition().x * Constant.RATE - size;
