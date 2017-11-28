@@ -46,33 +46,32 @@ public class DrawUtils {
     }
 
     public static void drawLeftFlipper(float x,float y,float angle, Graphics g,float size){
-        //先创建一个宽为width，高为height的图片
-        BufferedImage img= new BufferedImage((int)size,(int) size,BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = img.createGraphics();
+        Graphics2D g2d = (Graphics2D) g;
         // 画图
         g2d.setColor(Color.orange);
-        g2d.fillRect(0,0,(int)(size/8),(int) size);
+        g2d.translate((int)x, (int)y);
+        g2d.rotate(angle);
+        g2d.translate(-(int)x, -(int)y);
+        g2d.fillRect((int)x,(int)y,(int)(size/8),(int) size);
         g2d.setColor(Color.white);
-        g2d.fillOval(0,0,(int)(size/8),(int) (size/8));
-        AffineTransform transform = g2d.getTransform();
-        transform.rotate(angle, 0, 0);
-        g2d.setTransform(transform);
-//        g2d.rotate(angle);
+        g2d.fillOval((int)x,(int)y,(int)(size/8),(int) (size/8));
         g2d.dispose();
-        g.drawImage(img,(int)x,(int)y,null);
+
     }
 
-    public static void drawRightFlipper(float x,float y,float angle,Graphics g,float size){        //先创建一个宽为width，高为height的图片
-        BufferedImage img= new BufferedImage((int)size,(int) size,BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = img.createGraphics();
+    public static void drawRightFlipper(float x,float y,float angle,Graphics g,float size){
+        Graphics2D g2d = (Graphics2D) g;
+        // 画图
         g2d.setColor(Color.orange);
-        g2d.fillRect((int) (size*7/8),(int) 0,(int)(size/8),(int) size);
-        g2d.setColor(Color.white);
-        g2d.fillOval((int) (size*7/8),(int) 0,(int)(size/8),(int) (size/8));
+        g2d.translate((int)(x + size), (int)y);
         g2d.rotate(angle);
+        g2d.translate(-(int)(x + size), -(int)y);
+        g2d.fillRect((int)(x + size*7/8),(int)y,(int)(size/8),(int) size);
+        g2d.setColor(Color.white);
+        g2d.fillOval((int)(x + size*7/8),(int)y,(int)(size/8),(int) (size/8));
         g2d.dispose();
-        g.drawImage(img,(int)x,(int)y,null);
     }
+
 
     public static void drawTriangle(float x,float y,Graphics g,float size,double angle){
         g.setColor(Constant.COLOR_TRIANGLE);
