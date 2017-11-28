@@ -97,7 +97,8 @@ public class GameController implements UiListener, ContactListener {
             float size = comp.getSize()*Constant.RATE;
             Body body = comp.getBody();
             if(body!=null){
-                if((int)body.getUserData()==Constant.COMPONENT_BALL) {
+                BodyData bd = (BodyData) body.getUserData();
+                if(bd.getType()==Constant.COMPONENT_BALL) {
                     continue;
                 }
                 float x1 = comp.getBody().getPosition().x*Constant.RATE-size;
@@ -130,6 +131,19 @@ public class GameController implements UiListener, ContactListener {
             generateComponent(point, currentType, size);
         }
         return components;
+    }
+
+    private void removeBody(Body bodyParam){
+        if(bodyParam.getUserData()==null) return;
+        BodyData bd = (BodyData) bodyParam.getUserData();
+        long id = bd.getId();
+        for (AbstractCustomBody body : components) {
+            BodyData tmp = (BodyData) body.getBody().getUserData();
+            if(tmp.getId()==id){
+                components.remove(body);
+                break;
+            }
+        }
     }
 
     /**
@@ -238,9 +252,7 @@ public class GameController implements UiListener, ContactListener {
     public void onDestroy() {
         for (Body body: destroyBodys) {
             world.destroyBody(body);
-            if(body.getUserData()==null) return;
-            BodyData bd = (BodyData) body.getUserData();
-            bd.getId()
+            removeBody(body);
         }
         destroyBodys.clear();
     }
@@ -254,11 +266,13 @@ public class GameController implements UiListener, ContactListener {
                 ||bodyB==null||bodyB.getUserData()==null) {
             return;
         }
-        if((int) bodyA.getUserData()==Constant.COMPONENT_ABSORBER
-                &&(int) bodyB.getUserData()==Constant.COMPONENT_BALL) {
-            destroyBodys.add(bodyB);
-        }else if((int) bodyB.getUserData()==Constant.COMPONENT_ABSORBER
-                &&(int) bodyA.getUserData()==Constant.COMPONENT_BALL){
+        BodyData bdb = (BodyData) bodyB.getUserData();
+        BodyData bda = (BodyData) bodyA.getUserData();
+        if(bda.getType()==Constant.COMPONENT_ABSORBER
+                &&bdb.getType()==Constant.COMPONENT_BALL) {
+                    destroyBodys.add(bodyB);
+        }else if((bdb.getType()==Constant.COMPONENT_ABSORBER
+                &&(bda.getType()==Constant.COMPONENT_BALL))){
             destroyBodys.add(bodyB);
         }
     }
