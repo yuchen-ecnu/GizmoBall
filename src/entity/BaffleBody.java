@@ -25,7 +25,7 @@ public class BaffleBody extends AbstractCustomBody {
 
     @Override
     public void applyAngularImpulse() {
-        body.applyAngularImpulse(10000.0f * (getBodyType() == Constant.COMPONENT_LEFT_BAFFLE ? 1 : -1));
+        body.applyAngularImpulse(10000.0f * (getBodyType() == Constant.COMPONENT_LEFT_BAFFLE ? -1 : 1));
     }
 
     @Override
@@ -35,6 +35,7 @@ public class BaffleBody extends AbstractCustomBody {
         float y = vec2.y - size;
         int unitSize = Constant.BOARD_SIZE/Constant.GRID_COUNT;
         if(getBodyType() == Constant.COMPONENT_LEFT_BAFFLE) {
+            System.out.println(body.getAngle());
             DrawUtils.drawLeftFlipper(x * Constant.RATE * unitSize, y * Constant.RATE * unitSize,
                     body.getAngle(), g, size * Constant.RATE * unitSize * 2);
         } else {

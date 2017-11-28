@@ -5,6 +5,7 @@ import entity.*;
 import entity.base.AbstractCustomBody;
 import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.collision.shapes.PolygonShape;
+import org.jbox2d.collision.shapes.ShapeType;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.*;
 import org.jbox2d.dynamics.joints.RevoluteJointDef;
@@ -198,18 +199,11 @@ public class Box2DUtil {
         float r = length / 2.0f / Constant.RATE;
         //宽高
         polygon.setAsBox(r/6.0f, r);
-        //配置物体属性参数
-        FixtureDef fDef=new FixtureDef();
-        fDef.density=0;
-        //摩擦因子
-        fDef.friction=1.0f;
-        //恢复系数
-        fDef.restitution=1.0f;
-        fDef.shape=polygon;
 
         //创建刚体
         BodyDef bodyDef=new BodyDef();
-        bodyDef.type=BodyType.STATIC;
+        bodyDef.type=BodyType.DYNAMIC;
+        bodyDef.gravityScale = 100;
         if(direction == Constant.COMPONENT_LEFT_BAFFLE){
             bodyDef.position.set(x/Constant.RATE,y/Constant.RATE + r);
         }else{
@@ -217,19 +211,27 @@ public class Box2DUtil {
         }
 
         Body body=world.createBody(bodyDef);
-        body.createFixture(fDef);
+        body.createFixture(polygon, 1);
 
+        BodyDef fixpoint=new BodyDef();
+        fixpoint.type=BodyType.STATIC;
+        bodyDef.gravityScale = 100;
         //创建定点（旋转关节）
         RevoluteJointDef rjd = new RevoluteJointDef();
         if (direction == Constant.COMPONENT_LEFT_BAFFLE) {
-            rjd.initialize(body, body, new Vec2(((x + 0.875f) * length / Constant.RATE), y * length / Constant.RATE));
+            fixpoint.position.set((x)/Constant.RATE, (y)/Constant.RATE);
+            rjd.initialize(new Body(fixpoint,world), body, new Vec2((x)/Constant.RATE, (y)/Constant.RATE));
             rjd.upperAngle = 0;
-            rjd.lowerAngle = -(float) (Math.PI / 2);
+            rjd.lowerAngle = -(float) (Math.PI/2);
+
         } else {
-            rjd.initialize(body, body, new Vec2((x + 0.125f) * length / Constant.RATE, y * length / Constant.RATE));
+            fixpoint.position.set((x+length)/Constant.RATE, y/Constant.RATE+r);
+            rjd.initialize(new Body(fixpoint,world), body, new Vec2((x+length)/Constant.RATE, y/Constant.RATE+r));
             rjd.lowerAngle = 0;
-            rjd.upperAngle = (float) (Math.PI / 2);
+            rjd.upperAngle = (float) (Math.PI /2);
         }
+        rjd.enableLimit = true;
+        world.createJoint(rjd);
         return new BaffleBody(body,direction,r,color);
     }
 

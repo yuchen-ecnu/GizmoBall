@@ -235,9 +235,9 @@ public class GameController implements UiListener, ContactListener {
     @Override
     public void onKeyPressed() {
         //编辑状态不做响应
-//        if(!Constant.DRAW_THREAD_FLAG) {
-//            return;
-//        }
+        if(!Constant.DRAW_THREAD_FLAG) {
+            return;
+        }
         for (AbstractCustomBody body:components) {
             Integer type = body.getBodyType();
             if(type==null){ continue; }
