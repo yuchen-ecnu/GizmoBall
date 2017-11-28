@@ -22,6 +22,8 @@ import java.awt.*;
  */
 public class Box2DUtil {
 
+    private static Body ground;
+
     public static Body rotationBody(AbstractCustomBody abstractCustomBody, World world){
         if(abstractCustomBody==null||abstractCustomBody.getBody()==null){
             return null;
@@ -104,12 +106,13 @@ public class Box2DUtil {
         fDef.friction=1.0f;
         //恢复系数
         fDef.restitution=1.0f;
+        fDef.density = 50;
         fDef.shape=polygon;
 
         //创建刚体
         BodyDef bodyDef=new BodyDef();
         bodyDef.gravityScale = 0;
-        bodyDef.type=BodyType.STATIC;
+        bodyDef.type=BodyType.DYNAMIC;
         bodyDef.position.set(x/Constant.RATE + r,y/Constant.RATE + r);
 
         Body body=world.createBody(bodyDef);
@@ -194,12 +197,8 @@ public class Box2DUtil {
      * @param color 颜色
      */
     public static BaffleBody createBaffleBody(float x,float y, float length, int direction, World world, Color color) {
-        //自定义形状
-        PolygonShape polygon =new PolygonShape();
-        float r = length / 2.0f / Constant.RATE;
-        //宽高
-        polygon.setAsBox(r/6.0f, r);
 
+        float r = length / 2.0f / Constant.RATE;
         //创建刚体
         BodyDef bodyDef=new BodyDef();
         bodyDef.type=BodyType.DYNAMIC;
@@ -209,24 +208,20 @@ public class Box2DUtil {
         }else{
             bodyDef.position.set(x/Constant.RATE + 2*r,y/Constant.RATE + r);
         }
-
         Body body=world.createBody(bodyDef);
+        PolygonShape polygon =new PolygonShape();
+        polygon.setAsBox(r/6.0f, r);
         body.createFixture(polygon, 1);
 
-        BodyDef fixpoint=new BodyDef();
-        fixpoint.type=BodyType.STATIC;
-        bodyDef.gravityScale = 100;
         //创建定点（旋转关节）
         RevoluteJointDef rjd = new RevoluteJointDef();
         if (direction == Constant.COMPONENT_LEFT_BAFFLE) {
-            fixpoint.position.set((x)/Constant.RATE, (y)/Constant.RATE);
-            rjd.initialize(new Body(fixpoint,world), body, new Vec2((x)/Constant.RATE, (y)/Constant.RATE));
+            rjd.initialize(ground, body, new Vec2((x)/Constant.RATE, (y)/Constant.RATE));
             rjd.upperAngle = 0;
             rjd.lowerAngle = -(float) (Math.PI/2);
 
         } else {
-            fixpoint.position.set((x+length)/Constant.RATE, y/Constant.RATE+r);
-            rjd.initialize(new Body(fixpoint,world), body, new Vec2((x+length)/Constant.RATE, y/Constant.RATE+r));
+            rjd.initialize(ground, body, new Vec2((x+length)/Constant.RATE, y/Constant.RATE+r));
             rjd.lowerAngle = 0;
             rjd.upperAngle = (float) (Math.PI /2);
         }
@@ -443,6 +438,8 @@ public class Box2DUtil {
         bodyDef.position.set(x/2.0f/Constant.RATE,y/Constant.RATE);
         body=world.createBody(bodyDef);
         body.createFixture(fDef);
+        ground = body;
+
         //Left
         bodyDef.position.set(0,y/2.0f/Constant.RATE);
         fDef.shape=verticalShape;
