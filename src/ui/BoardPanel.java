@@ -43,9 +43,9 @@ public class BoardPanel extends JPanel {
 		super.paint(g);
 		drawBoard(g);
 		drawComponent(g);
-		DrawUtils.drawRightFlipper(120, 120,
-				(float) (Math.PI)*3/4, g, 90);
-		DrawUtils.drawSquare(300,300,g,30);
+		//DrawUtils.drawRightFlipper(120, 120,
+				//(float) (Math.PI)*3/4, g, 90);
+		//DrawUtils.drawSquare(300,300,g,30);
 	}
 
 	private void drawComponent(Graphics g) {

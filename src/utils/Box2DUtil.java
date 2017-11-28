@@ -108,7 +108,7 @@ public class Box2DUtil {
         //创建刚体
         BodyDef bodyDef=new BodyDef();
         bodyDef.gravityScale = 0;
-        bodyDef.type=BodyType.DYNAMIC;
+        bodyDef.type=BodyType.STATIC;
         bodyDef.position.set(x/Constant.RATE + r,y/Constant.RATE + r);
 
         Body body=world.createBody(bodyDef);
@@ -131,16 +131,17 @@ public class Box2DUtil {
         polygon.setAsBox(r, r);
         //配置物体属性参数
         FixtureDef fDef=new FixtureDef();
-        fDef.density=0;
+        fDef.density=Constant.COMPONENT_DESTINY;
         //摩擦因子
-        fDef.friction=1.0f;
+        fDef.friction=3.0f;
         //恢复系数
-        fDef.restitution=0.0f;
+        fDef.restitution=1.0f;
         fDef.shape=polygon;
 
         //创建刚体
         BodyDef bodyDef=new BodyDef();
-        bodyDef.type=BodyType.STATIC;
+        bodyDef.gravityScale = 0;
+        bodyDef.type=BodyType.DYNAMIC;
         bodyDef.position.set(x/Constant.RATE + r,y/Constant.RATE + r);
 
         Body body=world.createBody(bodyDef);

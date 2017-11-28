@@ -55,7 +55,7 @@ public class DrawUtils {
         g2d.fillRect((int)x,(int)y,(int)(size/8),(int) size);
         g2d.setColor(Color.white);
         g2d.fillOval((int)x,(int)y,(int)(size/8),(int) (size/8));
-        g2d.dispose();
+        //g2d.dispose();
 
     }
 
