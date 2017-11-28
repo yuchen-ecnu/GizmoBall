@@ -30,8 +30,8 @@ public class FileUtils {
         for (AbstractCustomBody abstractCustomBody: abstractCustomBodyList) {
             SerializableObject serializableObject = new SerializableObject();
             int type = Integer.parseInt(abstractCustomBody.getBody().getUserData().toString());
-            float x = (abstractCustomBody.getBody().getPosition().x - abstractCustomBody.getSize()) * Constant.RATE;
-            float y = (abstractCustomBody.getBody().getPosition().y - abstractCustomBody.getSize()) * Constant.RATE;
+            float x = (abstractCustomBody.getBody().getPosition().y - abstractCustomBody.getSize()) * Constant.RATE;
+            float y = (abstractCustomBody.getBody().getPosition().x - abstractCustomBody.getSize()) * Constant.RATE;
             float size = abstractCustomBody.getSize() * Constant.RATE * 2;
             float direction = abstractCustomBody.getBody().getAngle();
             Color color = abstractCustomBody.getColor();
