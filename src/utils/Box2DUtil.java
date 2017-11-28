@@ -62,12 +62,14 @@ public class Box2DUtil {
                 retBody = elasticPlateBody.getBody();
                 break;
             case Constant.COMPONENT_LEFT_BAFFLE:
-                BaffleBody leftBaffleBody = Box2DUtil.createBaffleBody(x,y,size*2,Constant.COMPONENT_LEFT_BAFFLE,world,Constant.COLOR_SQUARE);
-                retBody = leftBaffleBody.getBody();
+                //BaffleBody leftBaffleBody = Box2DUtil.createBaffleBody(x,y,size*2,Constant.COMPONENT_LEFT_BAFFLE,world,Constant.COLOR_SQUARE);
+                //retBody = leftBaffleBody.getBody();
+                retBody = abstractCustomBody.getBody();
                 break;
             case Constant.COMPONENT_RIGHT_BAFFLE:
-                BaffleBody rightBaffleBody = Box2DUtil.createBaffleBody(x,y,size*2,Constant.COMPONENT_RIGHT_BAFFLE,world,Constant.COLOR_SQUARE);
-                retBody = rightBaffleBody.getBody();
+                //BaffleBody rightBaffleBody = Box2DUtil.createBaffleBody(x,y,size*2,Constant.COMPONENT_RIGHT_BAFFLE,world,Constant.COLOR_SQUARE);
+                //retBody = rightBaffleBody.getBody();
+                retBody = abstractCustomBody.getBody();
                 break;
             case Constant.COMPONENT_ABSORBER:
                 AbsorberBody absorberBody = Box2DUtil.createAbsorber(x,y,size*2,world,Constant.COLOR_SQUARE);
