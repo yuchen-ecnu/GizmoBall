@@ -18,7 +18,8 @@ public class Ball extends AbstractCustomBody {
         this.size = radius;
         this.body = body;
         this.color = color;
-        body.setUserData(Constant.COMPONENT_BALL);
+        BodyData bd = new BodyData(System.currentTimeMillis(),Constant.COMPONENT_BALL);
+        body.setUserData(bd);
     }
 
     @Override

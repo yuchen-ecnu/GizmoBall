@@ -57,7 +57,7 @@ public class DrawUtils {
         AffineTransform transform = g2d.getTransform();
         transform.rotate(angle, 0, 0);
         g2d.setTransform(transform);
-        g2d.rotate(angle);
+//        g2d.rotate(angle);
         g2d.dispose();
         g.drawImage(img,(int)x,(int)y,null);
     }

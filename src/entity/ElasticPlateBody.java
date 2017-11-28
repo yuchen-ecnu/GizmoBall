@@ -19,7 +19,8 @@ public class ElasticPlateBody extends AbstractCustomBody {
         this.size = size;
         this.body = body;
         this.color = color;
-        body.setUserData(Constant.COMPONENT_ELASTIC_PLATE);
+        BodyData bd = new BodyData(System.currentTimeMillis(),Constant.COMPONENT_ELASTIC_PLATE);
+        body.setUserData(bd);
     }
 
     @Override

@@ -31,9 +31,11 @@ import java.util.List;
 public class GameController implements UiListener, ContactListener {
     private World world;
     private List<AbstractCustomBody> components;
-    
+    private List<Body> destroyBodys;
+
     public GameController() {
         components = new ArrayList<>();
+        destroyBodys= new ArrayList<>();
         //创建 重力加速度为10 的世界
         world = new World(new Vec2(0.0f,10.0f));
         world.setContactListener(this);
@@ -233,6 +235,17 @@ public class GameController implements UiListener, ContactListener {
     }
 
     @Override
+    public void onDestroy() {
+        for (Body body: destroyBodys) {
+            world.destroyBody(body);
+            if(body.getUserData()==null) return;
+            BodyData bd = (BodyData) body.getUserData();
+            bd.getId()
+        }
+        destroyBodys.clear();
+    }
+
+    @Override
     public void beginContact(Contact contact) {
         //吸收器
         Body bodyA = contact.getFixtureA().getBody();
@@ -243,10 +256,10 @@ public class GameController implements UiListener, ContactListener {
         }
         if((int) bodyA.getUserData()==Constant.COMPONENT_ABSORBER
                 &&(int) bodyB.getUserData()==Constant.COMPONENT_BALL) {
-            world.destroyBody(bodyB);
+            destroyBodys.add(bodyB);
         }else if((int) bodyB.getUserData()==Constant.COMPONENT_ABSORBER
                 &&(int) bodyA.getUserData()==Constant.COMPONENT_BALL){
-            world.destroyBody(bodyA);
+            destroyBodys.add(bodyB);
         }
     }
 

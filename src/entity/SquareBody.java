@@ -23,7 +23,8 @@ public class SquareBody extends AbstractCustomBody {
         this.body = body;
         this.color = color;
         this.size = size;
-        body.setUserData(Constant.COMPONENT_SQUARE);
+        BodyData bd = new BodyData(System.currentTimeMillis(),Constant.COMPONENT_SQUARE);
+        body.setUserData(bd);
     }
 
     @Override

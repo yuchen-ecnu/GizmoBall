@@ -20,7 +20,8 @@ public class AbsorberBody extends AbstractCustomBody {
         this.size = radious;
         this.body = body;
         this.color = color;
-        body.setUserData(Constant.COMPONENT_ABSORBER);
+        BodyData bd = new BodyData(System.currentTimeMillis(),Constant.COMPONENT_ABSORBER);
+        body.setUserData(bd);
     }
 
     @Override
@@ -36,9 +37,4 @@ public class AbsorberBody extends AbstractCustomBody {
         int unitSize = Constant.BOARD_SIZE/Constant.GRID_COUNT;
         DrawUtils.drawAbsorber(x*Constant.RATE*unitSize,y*Constant.RATE*unitSize,g,size*Constant.RATE*unitSize*2);
     }
-//
-//    @Override
-//    public void rotation(World world) {
-//        //Do nothing
-//    }
 }

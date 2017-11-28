@@ -19,7 +19,8 @@ public class TriangleBody extends AbstractCustomBody {
         this.size = size;
         this.color = color;
         this.body = body;
-        body.setUserData(Constant.COMPONENT_TRIANGLE);
+        BodyData bd = new BodyData(System.currentTimeMillis(),Constant.COMPONENT_TRIANGLE);
+        body.setUserData(bd);
     }
 
     @Override

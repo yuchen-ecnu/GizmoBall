@@ -1,6 +1,7 @@
 package listener;
 
 import entity.base.AbstractCustomBody;
+import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.World;
 
 import java.awt.*;
@@ -19,4 +20,5 @@ public interface UiListener {
     List<AbstractCustomBody> componentInfoProvider();
     void onMenuClicked(int type);
     void onKeyPressed();
+    void onDestroy();
 }

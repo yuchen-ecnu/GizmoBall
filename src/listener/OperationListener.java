@@ -10,4 +10,5 @@ public interface OperationListener {
     void onRepaintBoard();
     void onMenuBarClicked(int type);
     void onKeyPressed();
+    void onDestroy();
 }

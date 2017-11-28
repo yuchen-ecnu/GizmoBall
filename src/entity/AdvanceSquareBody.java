@@ -14,7 +14,8 @@ public class AdvanceSquareBody extends AbstractCustomBody {
         this.size = size;
         this.color = color;
         this.body = body;
-        body.setUserData(Constant.COMPONENT_ADVANCED_SQUARE);
+        BodyData bd = new BodyData(System.currentTimeMillis(),Constant.COMPONENT_ADVANCED_SQUARE);
+        body.setUserData(bd);
     }
 
     @Override
@@ -31,8 +32,4 @@ public class AdvanceSquareBody extends AbstractCustomBody {
         DrawUtils.drawStickSquare(x*Constant.RATE*unitSize,y*Constant.RATE*unitSize,g,size*Constant.RATE*unitSize*2);
     }
 
-//    @Override
-//    public void rotation(World world) {
-//        //Do nothing
-//    }
 }

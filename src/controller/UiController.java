@@ -67,4 +67,9 @@ public class UiController implements OperationListener {
         uiListener.onKeyPressed();
         mainFrame.repaintBoardPanel(uiListener.componentInfoProvider());
     }
+
+    @Override
+    public void onDestroy() {
+        uiListener.onDestroy();
+    }
 }

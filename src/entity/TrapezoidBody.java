@@ -17,7 +17,8 @@ public class TrapezoidBody extends AbstractCustomBody {
         this.size = size;
         this.color = color;
         this.body = body;
-        body.setUserData(Constant.COMPONENT_TRAPEZOID);
+        BodyData bd = new BodyData(System.currentTimeMillis(),Constant.COMPONENT_TRAPEZOID);
+        body.setUserData(bd);
     }
 
     @Override

@@ -6,6 +6,8 @@ import listener.UiListener;
 import org.jbox2d.dynamics.World;
 import ui.BoardPanel;
 
+import java.util.List;
+
 /**
  * @description 绘制线程，负责刷新界面
  * @author Jack Chen
@@ -25,6 +27,7 @@ public class DrawThread extends Thread {
         while(Constant.DRAW_THREAD_FLAG){
             world.step(Constant.TIME_STEP,Constant.VELOCITY_ITERATION,Constant.POSITION_ITERATION);
             operationListener.onRepaintBoard();
+            operationListener.onDestroy();
             try {
                 Thread.sleep(20);
             } catch (InterruptedException e) {

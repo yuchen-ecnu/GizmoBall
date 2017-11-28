@@ -1,5 +1,6 @@
 package entity.base;
 
+import entity.BodyData;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.World;
 import utils.Box2DUtil;
@@ -36,7 +37,12 @@ public abstract class AbstractCustomBody implements Serializable {
     }
 
     public Integer getBodyType(){
-        return isEmpty() ? null: (Integer) body.getUserData();
+        if (isEmpty()){
+            return null;
+        } else {
+            BodyData bd = (BodyData) body.getUserData();
+            return bd.getType();
+        }
     }
 
     private boolean isEmpty(){

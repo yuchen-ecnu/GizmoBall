@@ -14,7 +14,8 @@ public class CircleBody extends AbstractCustomBody {
         this.body = body;
         this.color = color;
         this.size = radious;
-        body.setUserData(Constant.COMPONENT_CIRCLE);
+        BodyData bd = new BodyData(System.currentTimeMillis(),Constant.COMPONENT_CIRCLE);
+        body.setUserData(bd);
     }
 
     @Override

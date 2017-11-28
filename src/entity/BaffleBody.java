@@ -19,7 +19,8 @@ public class BaffleBody extends AbstractCustomBody {
         this.size = size;
         this.body = body;
         this.color = color;
-        body.setUserData(type);
+        BodyData bd = new BodyData(System.currentTimeMillis(),type);
+        body.setUserData(bd);
     }
 
     @Override
