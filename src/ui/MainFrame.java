@@ -24,7 +24,6 @@ public class MainFrame extends JFrame {
 	private BoardPanel boardPanel;
 	private MenuBar menuBar;
 	private OperationPanel operationPanel;
-	private Point point = new Point();
 
 	public MainFrame(OperationListener listener) {
 		setResizable(false);
@@ -45,13 +44,6 @@ public class MainFrame extends JFrame {
 		boardPanel = new BoardPanel(listener);
 		boardPanel.setLocation(10, 10);
 		contentPane.add(boardPanel);
-		boardPanel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				point = e.getPoint();
-				listener.onBorderClicked(point,operationPanel.getComponentSize());
-			}
-		});
 
 		operationPanel = new OperationPanel(listener);
 		contentPane.add(operationPanel);
@@ -59,5 +51,9 @@ public class MainFrame extends JFrame {
 
 	public void repaintBoardPanel(List<AbstractCustomBody> components){
 		boardPanel.repaintBoard(components);
+	}
+
+	public int getComponentSize() {
+		return operationPanel.getComponentSize();
 	}
 }

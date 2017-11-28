@@ -3,11 +3,11 @@ package ui;
 import constant.Constant;
 import entity.base.AbstractCustomBody;
 import listener.OperationListener;
-import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.Body;
 import utils.DrawUtils;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,17 +21,21 @@ import javax.swing.JPanel;
 public class BoardPanel extends JPanel {
 
 	private OperationListener listener;
-	private Point point;
 	private List<AbstractCustomBody> components;
 
 
 	public BoardPanel(OperationListener listener) {
 		this.listener = listener;
-		this.point= new Point();
 		this.components = new ArrayList<>();
 		setBackground(Color.BLACK);
 		setBounds(10, 10, Constant.BOARD_SIZE, Constant.BOARD_SIZE);
 		setLayout(new GridLayout(200, 200, 0, 0));
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e){
+				listener.onBorderClicked(e.getPoint());
+			}
+		});
 	}
 
 	@Override
