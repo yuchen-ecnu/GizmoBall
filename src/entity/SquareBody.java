@@ -27,6 +27,11 @@ public class SquareBody extends AbstractCustomBody {
     }
 
     @Override
+    public void applyAngularImpulse() {
+
+    }
+
+    @Override
     public void drawSelf(Graphics g) {
         Vec2 vec2 = body.getPosition();
         float x = vec2.x - size;
@@ -34,9 +39,4 @@ public class SquareBody extends AbstractCustomBody {
         int unitSize = Constant.BOARD_SIZE/Constant.GRID_COUNT;
         DrawUtils.drawSquare(x*Constant.RATE*unitSize,y*Constant.RATE*unitSize,g,size*Constant.RATE*unitSize*2);
     }
-
-//    @Override
-//    public void rotation(World world) {
-//        //Do nothing
-//    }
 }

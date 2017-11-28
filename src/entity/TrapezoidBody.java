@@ -4,12 +4,13 @@ import constant.Constant;
 import entity.base.AbstractCustomBody;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
-import org.jbox2d.dynamics.World;
 import utils.DrawUtils;
 
-import javax.swing.*;
 import java.awt.*;
 
+/**
+ * 梯形
+ */
 public class TrapezoidBody extends AbstractCustomBody {
 
     public TrapezoidBody(Body body, float size, Color color) {
@@ -17,6 +18,11 @@ public class TrapezoidBody extends AbstractCustomBody {
         this.color = color;
         this.body = body;
         body.setUserData(Constant.COMPONENT_TRAPEZOID);
+    }
+
+    @Override
+    public void applyAngularImpulse() {
+
     }
 
     @Override
@@ -28,9 +34,4 @@ public class TrapezoidBody extends AbstractCustomBody {
         double angle = body.getAngle();
         DrawUtils.drawTrapezoid(x*Constant.RATE*unitSize,y*Constant.RATE*unitSize,g,size*Constant.RATE*unitSize*2,angle);
     }
-
-//    @Override
-//    public void rotation(World world) {
-//        //TODO:
-//    }
 }

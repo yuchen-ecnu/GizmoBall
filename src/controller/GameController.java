@@ -15,6 +15,7 @@ import utils.Box2DUtil;
 import utils.FileUtils;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -215,6 +216,21 @@ public class GameController implements UiListener, ContactListener {
         }
     }
 
+    @Override
+    public void onKeyPressed() {
+        //编辑状态不做响应
+//        if(!Constant.DRAW_THREAD_FLAG) {
+//            return;
+//        }
+        for (AbstractCustomBody body:components) {
+            Integer type = body.getBodyType();
+            if(type==null){ continue; }
+            if(type==Constant.COMPONENT_LEFT_BAFFLE
+                    ||type==Constant.COMPONENT_RIGHT_BAFFLE){
+                body.applyAngularImpulse();
+            }
+        }
+    }
 
     @Override
     public void beginContact(Contact contact) {

@@ -7,6 +7,7 @@ import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.*;
+import org.jbox2d.dynamics.joints.RevoluteJointDef;
 
 import javax.swing.*;
 import java.awt.*;
@@ -180,7 +181,7 @@ public class Box2DUtil {
     }
 
     /**
-     * 创建可活动挡板（完全非弹性碰撞）
+     * 创建可活动挡板
      * @param x 物体横坐标
      * @param y 物体纵坐标
      * @param length 挡板长度
@@ -214,6 +215,18 @@ public class Box2DUtil {
 
         Body body=world.createBody(bodyDef);
         body.createFixture(fDef);
+
+        //创建定点（旋转关节）
+        RevoluteJointDef rjd = new RevoluteJointDef();
+        if (direction == Constant.COMPONENT_LEFT_BAFFLE) {
+            rjd.initialize(body, body, new Vec2(((x + 0.875f) * length / Constant.RATE), y * length / Constant.RATE));
+            rjd.upperAngle = 0;
+            rjd.lowerAngle = -(float) (Math.PI / 2);
+        } else {
+            rjd.initialize(body, body, new Vec2((x + 0.125f) * length / Constant.RATE, y * length / Constant.RATE));
+            rjd.lowerAngle = 0;
+            rjd.upperAngle = (float) (Math.PI / 2);
+        }
         return new BaffleBody(body,direction,r,color);
     }
 

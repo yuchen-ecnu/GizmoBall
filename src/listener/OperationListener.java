@@ -1,6 +1,7 @@
 package listener;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public interface OperationListener {
     void onItemChoose(int type);
@@ -8,4 +9,5 @@ public interface OperationListener {
     void onBorderClicked(Point point);
     void onRepaintBoard();
     void onMenuBarClicked(int type);
+    void onKeyPressed();
 }

@@ -8,13 +8,14 @@ import thread.DrawThread;
 import ui.MainFrame;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 /**
 * @description UI 控制器
 * @author Jack Chen
 * @date 2017/11/21
 */
-public class UiController implements OperationListener{
+public class UiController implements OperationListener {
     private MainFrame mainFrame;
     private UiListener uiListener;
     private int curType;
@@ -58,6 +59,12 @@ public class UiController implements OperationListener{
     @Override
     public void onMenuBarClicked(int type) {
         uiListener.onMenuClicked(type);
+        mainFrame.repaintBoardPanel(uiListener.componentInfoProvider());
+    }
+
+    @Override
+    public void onKeyPressed() {
+        uiListener.onKeyPressed();
         mainFrame.repaintBoardPanel(uiListener.componentInfoProvider());
     }
 }

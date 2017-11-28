@@ -43,6 +43,8 @@ public class BoardPanel extends JPanel {
 		super.paint(g);
 		drawBoard(g);
 		drawComponent(g);
+		DrawUtils.drawLeftFlipper(300, 300,
+				(float) (-Math.PI), g, 60);
 	}
 
 	private void drawComponent(Graphics g) {

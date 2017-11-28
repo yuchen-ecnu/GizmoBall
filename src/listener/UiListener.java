@@ -4,6 +4,7 @@ import entity.base.AbstractCustomBody;
 import org.jbox2d.dynamics.World;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 
@@ -17,4 +18,5 @@ public interface UiListener {
     World onOperationClicked(int type);
     List<AbstractCustomBody> componentInfoProvider();
     void onMenuClicked(int type);
+    void onKeyPressed();
 }

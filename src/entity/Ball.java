@@ -22,6 +22,11 @@ public class Ball extends AbstractCustomBody {
     }
 
     @Override
+    public void applyAngularImpulse() {
+
+    }
+
+    @Override
     public void drawSelf(Graphics g) {
         Vec2 vec2 = body.getPosition();
         float size = this.size;
@@ -30,9 +35,4 @@ public class Ball extends AbstractCustomBody {
         int unitSize = Constant.BOARD_SIZE/Constant.GRID_COUNT;
         DrawUtils.drawBall(x*Constant.RATE*unitSize,y*Constant.RATE*unitSize,g);
     }
-
-//    @Override
-//    public void rotation(World world) {
-//        //Do nothing
-//    }
 }

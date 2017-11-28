@@ -35,9 +35,19 @@ public abstract class AbstractCustomBody implements Serializable {
         return size;
     }
 
+    public Integer getBodyType(){
+        return isEmpty() ? null: (Integer) body.getUserData();
+    }
+
+    private boolean isEmpty(){
+        return body == null || body.getUserData() == null;
+    }
+
     public void rotation(World world){
         this.body = Box2DUtil.rotationBody(this,world);
     }
+
+    public abstract void applyAngularImpulse();
 
     public void destroy(World world){
         world.destroyBody(body);

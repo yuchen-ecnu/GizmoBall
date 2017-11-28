@@ -3,12 +3,9 @@ package entity;
 import constant.Constant;
 import entity.base.AbstractCustomBody;
 import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.World;
 import utils.DrawUtils;
-import utils.ImageUtils;
 import org.jbox2d.dynamics.Body;
 
-import javax.swing.*;
 import java.awt.*;
 
 public class AdvanceSquareBody extends AbstractCustomBody {
@@ -18,6 +15,11 @@ public class AdvanceSquareBody extends AbstractCustomBody {
         this.color = color;
         this.body = body;
         body.setUserData(Constant.COMPONENT_ADVANCED_SQUARE);
+    }
+
+    @Override
+    public void applyAngularImpulse() {
+
     }
 
     @Override

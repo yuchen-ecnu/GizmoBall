@@ -3,6 +3,8 @@ package utils;
 import constant.Constant;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 
 public class DrawUtils {
 
@@ -43,18 +45,33 @@ public class DrawUtils {
         g.drawOval((int) (x + size/4),(int) (y + size/4),(int) (size/2),(int) (size/2));
     }
 
-    public static void drawLeftFlipper(float x,float y,Graphics g,float size){
-        g.setColor(Color.orange);
-        g.fillRect((int) x,(int) y,(int)(size/6),(int) size);
-        g.setColor(Color.white);
-        g.fillOval((int) x,(int) y,(int)(size/6),(int) (size/6));
+    public static void drawLeftFlipper(float x,float y,float angle, Graphics g,float size){
+        //先创建一个宽为width，高为height的图片
+        BufferedImage img= new BufferedImage((int)size,(int) size,BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = img.createGraphics();
+        // 画图
+        g2d.setColor(Color.orange);
+        g2d.fillRect(0,0,(int)(size/8),(int) size);
+        g2d.setColor(Color.white);
+        g2d.fillOval(0,0,(int)(size/8),(int) (size/8));
+        AffineTransform transform = g2d.getTransform();
+        transform.rotate(angle, 0, 0);
+        g2d.setTransform(transform);
+        g2d.rotate(angle);
+        g2d.dispose();
+        g.drawImage(img,(int)x,(int)y,null);
     }
 
-    public static void drawRightFlipper(float x,float y,Graphics g,float size){
-        g.setColor(Color.orange);
-        g.fillRect((int) (x + size*5/6),(int) y,(int)(size/6),(int) size);
-        g.setColor(Color.white);
-        g.fillOval((int) (x + size*5/6),(int) y,(int)(size/6),(int) (size/6));
+    public static void drawRightFlipper(float x,float y,float angle,Graphics g,float size){        //先创建一个宽为width，高为height的图片
+        BufferedImage img= new BufferedImage((int)size,(int) size,BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = img.createGraphics();
+        g2d.setColor(Color.orange);
+        g2d.fillRect((int) (size*7/8),(int) 0,(int)(size/8),(int) size);
+        g2d.setColor(Color.white);
+        g2d.fillOval((int) (size*7/8),(int) 0,(int)(size/8),(int) (size/8));
+        g2d.rotate(angle);
+        g2d.dispose();
+        g.drawImage(img,(int)x,(int)y,null);
     }
 
     public static void drawTriangle(float x,float y,Graphics g,float size,double angle){

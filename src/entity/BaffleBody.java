@@ -23,22 +23,24 @@ public class BaffleBody extends AbstractCustomBody {
     }
 
     @Override
+    public void applyAngularImpulse() {
+        body.applyAngularImpulse(10000.0f * (getBodyType() == Constant.COMPONENT_LEFT_BAFFLE ? 1 : -1));
+    }
+
+    @Override
     public void drawSelf(Graphics g) {
         Vec2 vec2 = body.getPosition();
         float x = vec2.x;
         float y = vec2.y - size;
         int unitSize = Constant.BOARD_SIZE/Constant.GRID_COUNT;
-        if((int)body.getUserData() == Constant.COMPONENT_LEFT_BAFFLE) {
-            DrawUtils.drawLeftFlipper(x * Constant.RATE * unitSize, y * Constant.RATE * unitSize, g, size * Constant.RATE * unitSize * 2);
+        if(getBodyType() == Constant.COMPONENT_LEFT_BAFFLE) {
+            DrawUtils.drawLeftFlipper(x * Constant.RATE * unitSize, y * Constant.RATE * unitSize,
+                    body.getAngle(), g, size * Constant.RATE * unitSize * 2);
         } else {
             x = x- 2*size;
-            DrawUtils.drawRightFlipper(x * Constant.RATE * unitSize, y * Constant.RATE * unitSize, g, size * Constant.RATE * unitSize * 2);
+            DrawUtils.drawRightFlipper(x * Constant.RATE * unitSize, y * Constant.RATE * unitSize,
+                    body.getAngle(), g, size * Constant.RATE * unitSize * 2);
         }
     }
-
-//    @Override
-//    public void rotation(World world) {
-//        //Do nothing
-//    }
 
 }

@@ -8,8 +8,7 @@ import utils.ScreenUtils;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.List;
 
 /**
@@ -47,7 +46,17 @@ public class MainFrame extends JFrame {
 
 		operationPanel = new OperationPanel(listener);
 		contentPane.add(operationPanel);
-	}
+        KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_F5,0);
+        InputMap inputMap = contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        inputMap.put(stroke, KeyEvent.VK_F5);
+        contentPane.getActionMap().put(KeyEvent.VK_F5, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("UP...UP");
+                listener.onKeyPressed();
+            }
+        });
+    }
 
 	public void repaintBoardPanel(List<AbstractCustomBody> components){
 		boardPanel.repaintBoard(components);

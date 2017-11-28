@@ -24,6 +24,11 @@ public class AbsorberBody extends AbstractCustomBody {
     }
 
     @Override
+    public void applyAngularImpulse() {
+
+    }
+
+    @Override
     public void drawSelf(Graphics g) {
         Vec2 vec2 = body.getPosition();
         float x = vec2.x - size;
