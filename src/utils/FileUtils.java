@@ -1,6 +1,7 @@
 package utils;
 
 import constant.Constant;
+import entity.BodyData;
 import entity.SerializableObject;
 import entity.base.AbstractCustomBody;
 
@@ -29,7 +30,8 @@ public class FileUtils {
         List<SerializableObject> result = new ArrayList<>();
         for (AbstractCustomBody abstractCustomBody: abstractCustomBodyList) {
             SerializableObject serializableObject = new SerializableObject();
-            int type = Integer.parseInt(abstractCustomBody.getBody().getUserData().toString());
+            BodyData bodyData = ((BodyData)abstractCustomBody.getBody().getUserData());
+            int type = bodyData.getType();
             float x = (abstractCustomBody.getBody().getPosition().y - abstractCustomBody.getSize()) * Constant.RATE;
             float y = (abstractCustomBody.getBody().getPosition().x - abstractCustomBody.getSize()) * Constant.RATE;
             float size = abstractCustomBody.getSize() * Constant.RATE * 2;

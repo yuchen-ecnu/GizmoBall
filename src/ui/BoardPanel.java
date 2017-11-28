@@ -50,6 +50,9 @@ public class BoardPanel extends JPanel {
 
 	private void drawComponent(Graphics g) {
         for (AbstractCustomBody abstractCustomBody : components) {
+        	if(abstractCustomBody.getBodyType() == Constant.COMPONENT_BALL){
+        		abstractCustomBody.drawSelf(g);
+			}
             abstractCustomBody.drawSelf(g);
         }
     }
