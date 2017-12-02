@@ -46,7 +46,7 @@ public class DrawUtils {
     }
 
     public static void drawLeftFlipper(float x,float y,float a, Graphics g,float size){
-        System.out.println(a);
+        a=-a;
         Graphics2D g2d = (Graphics2D) g;
         int []xPoints = {(int) x, (int) (x+size*Math.cos(a)/8),
                 (int) (x+size*Math.sin(a)+size*Math.cos(a)/8), (int) (x+size*Math.sin(a))};
@@ -58,9 +58,7 @@ public class DrawUtils {
     }
 
     public static void drawRightFlipper(float x,float y,float a,Graphics g,float size){
-        System.out.println(a);
         Graphics2D g2d = (Graphics2D) g;
-        a=-a;
         int []xPoints = {(int) x, (int) (x-size*Math.cos(a)/8),
                 (int) (x-size*Math.sin(a)-size*Math.cos(a)/8), (int) (x-size*Math.sin(a))};
         int []yPoints = {(int) y, (int) (y-size*Math.sin(a)/8),

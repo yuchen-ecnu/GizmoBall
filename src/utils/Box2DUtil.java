@@ -65,13 +65,9 @@ public class Box2DUtil {
                 retBody = elasticPlateBody.getBody();
                 break;
             case Constant.COMPONENT_LEFT_BAFFLE:
-                //BaffleBody leftBaffleBody = Box2DUtil.createBaffleBody(x,y,size*2,Constant.COMPONENT_LEFT_BAFFLE,world,Constant.COLOR_SQUARE);
-                //retBody = leftBaffleBody.getBody();
                 retBody = abstractCustomBody.getBody();
                 break;
             case Constant.COMPONENT_RIGHT_BAFFLE:
-                //BaffleBody rightBaffleBody = Box2DUtil.createBaffleBody(x,y,size*2,Constant.COMPONENT_RIGHT_BAFFLE,world,Constant.COLOR_SQUARE);
-                //retBody = rightBaffleBody.getBody();
                 retBody = abstractCustomBody.getBody();
                 break;
             case Constant.COMPONENT_ABSORBER:
@@ -112,7 +108,7 @@ public class Box2DUtil {
         //创建刚体
         BodyDef bodyDef=new BodyDef();
         bodyDef.gravityScale = 0;
-        bodyDef.type=BodyType.DYNAMIC;
+        bodyDef.type=BodyType.STATIC;
         bodyDef.position.set(x/Constant.RATE + r,y/Constant.RATE + r);
 
         Body body=world.createBody(bodyDef);
@@ -201,7 +197,7 @@ public class Box2DUtil {
         //创建刚体
         BodyDef bodyDef=new BodyDef();
         bodyDef.type=BodyType.DYNAMIC;
-        bodyDef.gravityScale = 10;
+        bodyDef.gravityScale = 100;
         if(direction == Constant.COMPONENT_LEFT_BAFFLE){
             bodyDef.position.set(x/Constant.RATE+r/8,y/Constant.RATE + r);
         }else{
@@ -210,12 +206,20 @@ public class Box2DUtil {
         Body body=world.createBody(bodyDef);
         PolygonShape polygon =new PolygonShape();
         polygon.setAsBox(r/8.0f, r);
-        body.createFixture(polygon, 1);
+        //配置物体属性参数
+        FixtureDef fDef=new FixtureDef();
+        //摩擦因子
+        fDef.friction=1.0f;
+        //恢复系数
+        fDef.restitution=2.0f;
+        fDef.shape=polygon;
+        fDef.density = 1;
+        body.createFixture(fDef);
 
         //创建定点（旋转关节）
         RevoluteJointDef rjd = new RevoluteJointDef();
         if (direction == Constant.COMPONENT_LEFT_BAFFLE) {
-            rjd.initialize(ground, body, new Vec2(x/Constant.RATE +r/8, (y)/Constant.RATE+r));
+            rjd.initialize(ground, body, new Vec2(x/Constant.RATE +r/8, (y)/Constant.RATE));
             rjd.upperAngle = 0;
             rjd.lowerAngle = -(float) (Math.PI/2);
         } else {
