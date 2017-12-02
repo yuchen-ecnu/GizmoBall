@@ -127,14 +127,14 @@ public class GameController implements UiListener, ContactListener {
                 default:
                     break;
             }
-        }else {
+        } else {
             generateComponent(point, currentType, size);
         }
         return components;
     }
 
     private void removeBody(Body bodyParam){
-        if(bodyParam.getUserData()==null) return;
+        if(bodyParam.getUserData()==null) { return; }
         BodyData bd = (BodyData) bodyParam.getUserData();
         long id = bd.getId();
         for (AbstractCustomBody body : components) {

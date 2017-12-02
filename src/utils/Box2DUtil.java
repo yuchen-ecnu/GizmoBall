@@ -197,33 +197,31 @@ public class Box2DUtil {
      * @param color 颜色
      */
     public static BaffleBody createBaffleBody(float x,float y, float length, int direction, World world, Color color) {
-
-        float r = length / 2.0f / Constant.RATE;
+        float r = length / Constant.RATE / 2.0f;
         //创建刚体
         BodyDef bodyDef=new BodyDef();
         bodyDef.type=BodyType.DYNAMIC;
-        bodyDef.gravityScale = 100;
+        bodyDef.gravityScale = 10;
         if(direction == Constant.COMPONENT_LEFT_BAFFLE){
-            bodyDef.position.set(x/Constant.RATE,y/Constant.RATE + r);
+            bodyDef.position.set(x/Constant.RATE+r/8,y/Constant.RATE + r);
         }else{
-            bodyDef.position.set(x/Constant.RATE + 2*r,y/Constant.RATE + r);
+            bodyDef.position.set(x/Constant.RATE + 2*r-r/8,y/Constant.RATE + r);
         }
         Body body=world.createBody(bodyDef);
         PolygonShape polygon =new PolygonShape();
-        polygon.setAsBox(r/6.0f, r);
+        polygon.setAsBox(r/8.0f, r);
         body.createFixture(polygon, 1);
 
         //创建定点（旋转关节）
         RevoluteJointDef rjd = new RevoluteJointDef();
         if (direction == Constant.COMPONENT_LEFT_BAFFLE) {
-            rjd.initialize(ground, body, new Vec2((x)/Constant.RATE, (y)/Constant.RATE));
+            rjd.initialize(ground, body, new Vec2(x/Constant.RATE, y/Constant.RATE));
             rjd.upperAngle = 0;
-            rjd.lowerAngle = -(float) (Math.PI/2);
-
+            rjd.lowerAngle = (float) (Math.PI/2);
         } else {
-            rjd.initialize(ground, body, new Vec2((x+length)/Constant.RATE, y/Constant.RATE+r));
+            rjd.initialize(ground, body, new Vec2(x/Constant.RATE, y/Constant.RATE));
             rjd.lowerAngle = 0;
-            rjd.upperAngle = (float) (Math.PI /2);
+            rjd.upperAngle = -(float) (Math.PI /2);
         }
         rjd.enableLimit = true;
         world.createJoint(rjd);

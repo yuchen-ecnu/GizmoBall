@@ -33,6 +33,7 @@ public class Ball extends AbstractCustomBody {
         float size = this.size;
         float x = vec2.x-size;
         float y = vec2.y-size;
+
         int unitSize = Constant.BOARD_SIZE/Constant.GRID_COUNT;
         DrawUtils.drawBall(x*Constant.RATE*unitSize,y*Constant.RATE*unitSize,g);
     }

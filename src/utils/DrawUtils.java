@@ -45,31 +45,25 @@ public class DrawUtils {
         g.drawOval((int) (x + size/4),(int) (y + size/4),(int) (size/2),(int) (size/2));
     }
 
-    public static void drawLeftFlipper(float x,float y,float angle, Graphics g,float size){
+    public static void drawLeftFlipper(float x,float y,float a, Graphics g,float size){
         Graphics2D g2d = (Graphics2D) g;
-        // 画图
+        int []xPoints = {(int) x, (int) (x+size*Math.cos(a)/8),
+                (int) (x+size*Math.sin(a)+size*Math.cos(a)/8), (int) (x+size*Math.sin(a))};
+        int []yPoints = {(int) y, (int) (y-size*Math.sin(a)/8),
+                (int) (y+size*Math.cos(a)-size*Math.sin(a)/8), (int) (y+size*Math.cos(a))};
         g2d.setColor(Color.orange);
-        g2d.translate((int)x, (int)y);
-        g2d.rotate(angle);
-        g2d.translate(-(int)x, -(int)y);
-        g2d.fillRect((int)x,(int)y,(int)(size/8),(int) size);
-        g2d.setColor(Color.white);
-        g2d.fillOval((int)x,(int)y,(int)(size/8),(int) (size/8));
-        //g2d.dispose();
+        g2d.fillPolygon(xPoints,yPoints,4);
 
     }
 
-    public static void drawRightFlipper(float x,float y,float angle,Graphics g,float size){
+    public static void drawRightFlipper(float x,float y,float a,Graphics g,float size){
         Graphics2D g2d = (Graphics2D) g;
-        // 画图
+        int []xPoints = {(int) x, (int) (x-size*Math.cos(a)/8),
+                (int) (x-size*Math.sin(a)-size*Math.cos(a)/8), (int) (x-size*Math.sin(a))};
+        int []yPoints = {(int) y, (int) (y-size*Math.sin(a)/8),
+                (int) (y+size*Math.cos(a)-size*Math.sin(a)/8), (int) (y+size*Math.cos(a))};
         g2d.setColor(Color.orange);
-        g2d.translate((int)(x + size), (int)y);
-        g2d.rotate(angle);
-        g2d.translate(-(int)(x + size), -(int)y);
-        g2d.fillRect((int)(x + size*7/8),(int)y,(int)(size/8),(int) size);
-        g2d.setColor(Color.white);
-        g2d.fillOval((int)(x + size*7/8),(int)y,(int)(size/8),(int) (size/8));
-        g2d.dispose();
+        g2d.fillPolygon(xPoints,yPoints,4);
     }
 
 
@@ -159,6 +153,7 @@ public class DrawUtils {
     }
 
     public static void drawBall(float x,float y, Graphics g) {
+        System.out.println(x+","+y);
         g.drawImage(Constant.IMAGE_BALL,(int)x,(int)y,null);
     }
 }
