@@ -215,13 +215,13 @@ public class Box2DUtil {
         //创建定点（旋转关节）
         RevoluteJointDef rjd = new RevoluteJointDef();
         if (direction == Constant.COMPONENT_LEFT_BAFFLE) {
-            rjd.initialize(ground, body, new Vec2(x/Constant.RATE, y/Constant.RATE));
+            rjd.initialize(ground, body, new Vec2(x/Constant.RATE +r/8, (y)/Constant.RATE+r));
             rjd.upperAngle = 0;
-            rjd.lowerAngle = (float) (Math.PI/2);
+            rjd.lowerAngle = -(float) (Math.PI/2);
         } else {
-            rjd.initialize(ground, body, new Vec2(x/Constant.RATE, y/Constant.RATE));
+            rjd.initialize(ground, body, new Vec2((x)/Constant.RATE +r*2-r/8, (y)/Constant.RATE));
             rjd.lowerAngle = 0;
-            rjd.upperAngle = -(float) (Math.PI /2);
+            rjd.upperAngle = (float) (Math.PI /2);
         }
         rjd.enableLimit = true;
         world.createJoint(rjd);
