@@ -49,8 +49,6 @@ public class MenuBar extends JMenuBar {
                 listener.onMenuBarClicked(Constant. MENUBAR_FILE_EXIT);
             }
         });
-        JMenu mnSetting = new JMenu("Setting");
-        JCheckBoxMenuItem mCheckCollision = new JCheckBoxMenuItem("Collision Effect");
         JMenu mnHelp = new JMenu("Help");
         JMenuItem mntmAbout = new JMenuItem("About");
 
@@ -60,8 +58,6 @@ public class MenuBar extends JMenuBar {
         mnFile.add(mSave);
         mnFile.add(mExit);
 
-        this.add(mnSetting);
-        mnSetting.add(mCheckCollision);
 
         this.add(mnHelp);
         mnHelp.add(mntmAbout);
