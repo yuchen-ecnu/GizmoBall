@@ -51,6 +51,13 @@ public class MenuBar extends JMenuBar {
         });
         JMenu mnHelp = new JMenu("Help");
         JMenuItem mntmAbout = new JMenuItem("About");
+        mntmAbout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AboutDialog dialog = new AboutDialog();
+                dialog.setVisible(true);
+            }
+        });
 
         this.add(mnFile);
         mnFile.add(mNew);

@@ -35,7 +35,7 @@ public class Constant {
     public static final int WINDOW_DONATE_WIDTH = 356;
     public static final int WINDOW_DONATE_HEIGHT = 562;
     public static final String IMG_DONATE = "donate.jpg";
-
+    public static final String IMG_JAVA = "java.png";
     /**Gizmo类型定义*/
     public static final int COMPONENT_CIRCLE = 1;
     public static final int COMPONENT_TRIANGLE = 2;
